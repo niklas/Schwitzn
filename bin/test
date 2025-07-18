@@ -1,0 +1,5 @@
+!#/usr/bin/env bash
+
+set -eu
+
+find bin lib spec | entr -c bundle exec rspec
