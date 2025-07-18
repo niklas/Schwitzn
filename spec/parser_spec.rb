@@ -28,5 +28,9 @@ EOORG
     it 'detects if support or not' do
       expect(entry).to be_band_support
     end
+
+    it 'detects pullup_reps' do
+      expect(entry.pullup_reps).to eq([8, 8, 8, 7])
+    end
   end
 end

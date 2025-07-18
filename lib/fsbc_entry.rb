@@ -4,12 +4,13 @@ class FSBCEntry < Entry
   attr_reader :comment
   attr_reader :details
   attr_reader :band_color
+  attr_reader :pullup_reps
 
-  def initialize(time, workout_name, details, num_sets, comment)
+  def initialize(time, workout_name, details, pullup_set, comment)
     super(time, workout_name)
 
     @details = details
-    @num_sets = num_sets.split('-').map(&:to_i)
+    @pullup_reps = pullup_set.split('-').map(&:to_i)
     @comment = comment
 
     parse_details
@@ -20,7 +21,7 @@ class FSBCEntry < Entry
   end
 
   def reps_in_set(num)
-    @num_sets[num-1] || 0
+    @pullup_reps[num-1] || 0
   end
 
   def color_in_set(set, total)
