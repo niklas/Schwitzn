@@ -1,0 +1,3 @@
+* Workout Graph
+
+Generates statistics and graphs from `.org` files containing notes on workouts.
