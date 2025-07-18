@@ -16,5 +16,17 @@ EOORG
     it 'detects workout_name' do
       expect(entry.workout_name).to eq('FBSC1')
     end
+
+    it 'detects details' do
+      expect(entry.details).to eq('black band, support')
+    end
+
+    it 'detects band color' do
+      expect(entry.band_color).to eq('black')
+    end
+
+    it 'detects if support or not' do
+      expect(entry).to be_band_support
+    end
   end
 end
