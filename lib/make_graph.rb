@@ -9,25 +9,13 @@ class MakeGraph
 
   def run
     out "parsing #{@org}"
-    @entries = File.read(@org).lines.map(&method(:parse_line)).reject(&:nil?)
+    @entries = Parser.new(File.read(@org))
     out "found #{@entries.size} entries"
 
     File.open(@html, 'w') do |f|
       f.write render_template
     end
     out "Generated #{@html}"
-  end
-
-  def parse_line(str)
-    return unless str =~ /^\s*-\s*</
-
-    case str
-    when %r~<([^>]*)> FBSC1 \(([^)]+)\) ([0-9-]+)\s?([^)]+)?~
-      FSBCEntry.new(*Regexp.last_match.captures)
-    else
-      out "??? #{str}"
-      nil
-    end
   end
 
   def render_template
