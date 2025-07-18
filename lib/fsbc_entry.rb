@@ -3,8 +3,8 @@ require 'entry'
 class FSBCEntry < Entry
   attr_reader :comment
 
-  def initialize(time, details, num_sets, comment)
-    super(time)
+  def initialize(time, workout_name, details, num_sets, comment)
+    super(time, workout_name)
 
     @details = details
     @num_sets = num_sets.split('-').map(&:to_i)

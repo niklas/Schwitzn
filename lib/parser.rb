@@ -12,7 +12,7 @@ class Parser
     return unless str =~ /^\s*-\s*</
 
     case str
-    when %r~<([^>]*)> FBSC1 \(([^)]+)\) ([0-9-]+)\s?([^)]+)?~
+    when %r~<([^>]*)> (FBSC1) \(([^)]+)\) ([0-9-]+)\s?([^)]+)?~
       FSBCEntry.new(*Regexp.last_match.captures)
     else
       out "??? #{str}"
