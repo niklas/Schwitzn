@@ -9,32 +9,39 @@ class Parser::OrgParser < Parslet::Parser
   rule(:rparen)   { str(')') }
   rule(:dash)     { str('-') }
   rule(:colon)    { str(':') }
+  rule(:comma)    { str(',') }
   rule(:digit)    { match['0-9'] }
 
   # Things
   rule(:heading)  { str('* Work out') >> newline }
-  rule(:org_date) { lt >> iso_date >> space? >> gt }
+  rule(:org_date) { lt >> iso_date >> gt }
   rule(:iso_date) { d(4) >> dash >>
                     d(2) >> dash >>
                     d(2) >> space >>
                     weekday >> time.maybe }
   rule(:time)     { space? >> d(2) >> colon >> d(2) }
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
-  rule(:pause)    { match('(\d):(\d{2}) Pause')}
+  rule(:pause)    { d(1,2) >> colon >> d(2) >> str('min Pause') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:pullup_variant) { str('black band, support')}
-  rule(:reps_sequence) { reps >> dash >> reps_sequence | reps  }
+  rule(:reps_sequence) { reps_count >> dash >> reps_sequence | reps_count  }
   rule(:reps_count) { digit.repeat(1,3) }
+  rule(:tags)       { (comma >> space? >> tag).repeat }
+  rule(:tag)      { alt(%w(heiß))}
 
   # Grammar parts
-  rule(:workout)  { workout_name >> lparen >> pullup_variant >> rparen >> reps_sequence >> lparen >> pause >> rparen}
+  rule(:workout)  { workout_name >> space >>
+                    lparen >> pullup_variant >> rparen >> space >>
+                    reps_sequence >> space >>
+                    lparen >> pause >> tags.maybe >> rparen >> newline
+  }
   rule(:bullets)  { bullet.repeat() }
-  rule(:bullet)   { str('-') >> space >> org_date >> workout }
+  rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
   rule(:org)      { heading.maybe >> bullets }
   root(:org)
 
-  def d(n)
-    digit.repeat(n)
+  def d(*n)
+    digit.repeat(*n)
   end
 
   def alt(alts)
