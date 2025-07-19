@@ -7,7 +7,17 @@ class Parser
   end
 
   def entries
-    @entries = @org.lines.map(&method(:parse_line)).reject(&:nil?)
+    @entries ||= ast.eval
+  end
+
+  def ast
+    @ast ||= begin
+               parser = Parser::OrgParser.new
+               transform = Parser::EntryTransform.new
+               transform.apply(
+                 parser.parse(@org)
+               )
+             end
   end
 
   private
