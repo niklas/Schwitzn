@@ -1,6 +1,8 @@
 class Parser
   require 'parser/org_parser'
   require 'parser/entry_transform'
+  class ParseFailed < StandardError
+  end
 
   def initialize(org)
     @org = org
@@ -19,7 +21,12 @@ class Parser
                )
              end
   rescue Parslet::ParseFailed => failure
-    raise "parsing failed\n#{failure.parse_failure_cause.ascii_tree}"
+    cause = failure.parse_failure_cause
+    root = cause
+    root = root.children.first while !root.children.empty?
+    indicator = 'at' + (' ' * (root.pos.charpos + 1)) + 'V'
+    at = "in #{root.pos.instance_variable_get('@string')}"
+    raise ParseFailed.new("#{indicator}\n#{at}\n#{failure.parse_failure_cause.ascii_tree}")
   end
 
   private
