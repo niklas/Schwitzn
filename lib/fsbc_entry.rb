@@ -6,11 +6,11 @@ class FSBCEntry < Entry
   attr_reader :band_color
   attr_reader :pullup_reps
 
-  def initialize(time, workout_name, details, pullup_set, comment)
+  def initialize(time, workout_name, details, pullup_reps, comment)
     super(time, workout_name)
 
     @details = details
-    @pullup_reps = pullup_set.split('-').map(&:to_i)
+    @pullup_reps = pullup_reps
     @comment = comment
 
     parse_details

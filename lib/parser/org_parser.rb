@@ -31,9 +31,9 @@ class Parser::OrgParser < Parslet::Parser
 
   # Grammar parts
   rule(:workout)  { workout_name.as(:workout_name) >> space >>
-                    lparen >> pullup_variant >> rparen >> space >>
-                    reps_sequence >> space >>
-                    lparen >> pause >> tags.maybe >> rparen >> newline
+                    lparen >> pullup_variant.as(:details) >> rparen >> space >>
+                    reps_sequence.as(:pullup_reps) >> space >>
+                    lparen >> pause >> tags.maybe.as(:tags) >> rparen >> newline
   }
   rule(:bullets)  { bullet.repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
