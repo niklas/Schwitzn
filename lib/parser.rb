@@ -18,6 +18,8 @@ class Parser
                  parser.parse(@org)
                )
              end
+  rescue Parslet::ParseFailed => failure
+    raise "parsing failed\n#{failure.parse_failure_cause.ascii_tree}"
   end
 
   private
