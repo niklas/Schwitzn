@@ -1,4 +1,7 @@
 class Parser
+  require 'parser/org_parser'
+  require 'parser/entry_transform'
+
   def initialize(org)
     @org = org
   end
