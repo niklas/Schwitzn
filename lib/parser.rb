@@ -9,7 +9,7 @@ class Parser
   end
 
   def entries
-    @entries ||= ast.eval
+    @entries ||= ast
   end
 
   def ast

@@ -14,7 +14,7 @@ class Parser::OrgParser < Parslet::Parser
 
   # Things
   rule(:heading)  { str('* Work out') >> newline }
-  rule(:org_date) { lt >> iso_date >> gt }
+  rule(:org_date) { lt >> iso_date.as(:time) >> gt }
   rule(:iso_date) { d(4) >> dash >>
                     d(2) >> dash >>
                     d(2) >> space >>
@@ -30,7 +30,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:tag)      { alt(%w(heiß))}
 
   # Grammar parts
-  rule(:workout)  { workout_name >> space >>
+  rule(:workout)  { workout_name.as(:workout_name) >> space >>
                     lparen >> pullup_variant >> rparen >> space >>
                     reps_sequence >> space >>
                     lparen >> pause >> tags.maybe >> rparen >> newline
