@@ -24,7 +24,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:pause)    { d(1,2) >> colon >> d(2) >> str('min Pause') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:pullup_variant) { str('black band, support')}
-  rule(:reps_sequence) { reps_count >> dash >> reps_sequence | reps_count  }
+  rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { digit.repeat(1,3) }
   rule(:tags)       { (comma >> space? >> tag).repeat }
   rule(:tag)      { alt(%w(heiß))}

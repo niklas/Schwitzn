@@ -1,8 +1,9 @@
 class Parser::EntryTransform < Parslet::Transform
+  rule(reps: simple(:reps)) { Integer(reps) }
   rule(
     time: simple(:time),
     workout_name: simple(:workout_name),
-    pullup_reps: simple(:pullup_reps),
+    pullup_reps: sequence(:pullup_reps),
     details: simple(:details),
     tags: simple(:tags)
   ) do
