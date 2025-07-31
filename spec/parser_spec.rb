@@ -1,6 +1,7 @@
 describe Parser do
   let(:org) { '' }
-  let(:entry) { described_class.new(org).entries.first }
+  let(:entry) { entries.first }
+  let(:entries) { described_class.new(org).entries }
 
   describe '#parse FSBC' do
     let(:org) do
@@ -31,6 +32,23 @@ EOORG
 
     it 'detects pullup_reps' do
       expect(entry.pullup_reps).to eq([8, 8, 8, 7])
+    end
+  end
+
+  describe '#parse whole org' do
+    let(:org) do
+      <<-EOORG
+* Work out
+  :PROPERTIES:
+  :LAST_REPEAT: [2024-02-12 Mon 02:46]
+  :END:
+
+- <2022-03-22 Tue> 2 x 13min @ 2
+      EOORG
+    end
+
+    it "finds all entries" do
+      expect(entries.length).to eq(1)
     end
   end
 end

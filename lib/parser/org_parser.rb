@@ -11,6 +11,15 @@ class Parser::OrgParser < Parslet::Parser
   rule(:colon)    { str(':') }
   rule(:comma)    { str(',') }
   rule(:digit)    { match['0-9'] }
+  rule(:uppercase_snake) { match['A-Z_'] }
+
+  # Consumers
+  rule(:rest_of_line) { match['^\n'].repeat }
+  rule(:empty_line) { match[' '].repeat >> newline }
+
+  # Org stufff
+  rule(:org_tags) { org_tag.repeat }
+  rule(:org_tag)  { space >> colon >> uppercase_snake.repeat >> colon >> rest_of_line >> newline }
 
   # Things
   rule(:heading)  { str('* Work out') >> newline }
@@ -37,7 +46,7 @@ class Parser::OrgParser < Parslet::Parser
   }
   rule(:bullets)  { bullet.repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
-  rule(:org)      { heading.maybe >> bullets }
+  rule(:org)      { heading.maybe >> org_tags.maybe >> empty_line.repeat >> bullets }
   root(:org)
 
   def d(*n)
