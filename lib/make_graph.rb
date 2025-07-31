@@ -9,7 +9,7 @@ class MakeGraph
 
   def run
     out "parsing #{@org}"
-    @entries = Parser.new(File.read(@org))
+    @entries = Parser.new(File.read(@org)).entries
     out "found #{@entries.size} entries"
 
     File.open(@html, 'w') do |f|
