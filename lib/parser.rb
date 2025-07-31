@@ -26,7 +26,7 @@ class Parser
     root = root.children.first until root.children.empty?
     indicator = 'at' + (' ' * (root.pos.charpos + 1)) + 'V'
     at = "in #{root.pos.instance_variable_get('@string')}"
-    raise ParseFailed.new("#{indicator}\n#{at}\n#{failure.parse_failure_cause.ascii_tree}")
+    raise ParseFailed, "\n#{indicator}\n#{at}\n#{failure.parse_failure_cause.ascii_tree}"
   end
 
   private
