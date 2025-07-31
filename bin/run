@@ -3,7 +3,17 @@
 load File.expand_path('../../lib/lib.rb', __FILE__)
 
 if $PROGRAM_NAME == __FILE__
-  org = ARGV.shift || "give input org file as first argument"
-  html = ARGV.shift || "give output html file as first argument"
+  manual = <<~EOMANUAL
+    Generate HTML statistics from Sport.org file.
+
+    Usage: #{$PROGRAM_NAME} Sport.org output.html
+  EOMANUAL
+
+  org = ARGV.shift
+  html = ARGV.shift
+  unless org && html
+    warn manual
+    exit 1
+  end
   MakeGraph.new(org, html).run
 end
