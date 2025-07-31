@@ -3,8 +3,7 @@
 load File.expand_path('../../lib/lib.rb', __FILE__)
 
 if $PROGRAM_NAME == __FILE__
-  MakeGraph.new(
-    "#{ENV['HOME']}/org/Sport.org",
-    "#{ENV['HOME']}/tmp/sport.html"
-  ).run
+  org = ARGV.shift || "give input org file as first argument"
+  html = ARGV.shift || "give output html file as first argument"
+  MakeGraph.new(org, html).run
 end
