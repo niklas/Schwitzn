@@ -39,11 +39,12 @@ class Parser::OrgParser < Parslet::Parser
   rule(:tag)      { alt(%w(heiß))}
 
   # Grammar parts
-  rule(:workout)  { workout_name.as(:workout_name) >> space >>
-                    lparen >> pullup_variant.as(:details) >> rparen >> space >>
-                    reps_sequence.as(:pullup_reps) >> space >>
-                    lparen >> pause >> tags.maybe.as(:tags) >> rparen >> newline
-  }
+  rule(:workout)  do
+    workout_name.as(:workout_name) >> space >>
+      lparen >> pullup_variant.as(:details) >> rparen >> space >>
+      reps_sequence.as(:pullup_reps) >> space >>
+      lparen >> pause >> tags.maybe.as(:tags) >> rparen >> newline
+  end
   rule(:bullets)  { bullet.repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
   rule(:org)      { heading.maybe >> org_tags.maybe >> empty_line.repeat >> bullets }
