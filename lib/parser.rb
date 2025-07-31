@@ -24,8 +24,10 @@ class Parser
     cause = failure.parse_failure_cause
     root = cause
     root = root.children.first until root.children.empty?
-    indicator = 'at' + (' ' * (root.pos.charpos + 1)) + 'V'
-    at = "in #{root.pos.instance_variable_get('@string')}"
+    lineno, column = root.source.line_and_column(root.pos)
+    line = root.pos.instance_variable_get('@string').lines[lineno - 1]
+    indicator = 'at |' + (' ' * (column + 1)) + 'V'
+    at = "in | #{line}"
     raise ParseFailed, "\n#{indicator}\n#{at}\n#{failure.parse_failure_cause.ascii_tree}"
   end
 
