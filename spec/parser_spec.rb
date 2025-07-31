@@ -10,7 +10,7 @@ EOORG
     end
 
     it 'detects time' do
-      expect(entry.time).to eq(Time.new(2024,9,4,14,00))
+      expect(entry.time).to eq(Time.new(2024, 9, 4, 14, 0))
     end
 
     it 'detects workout_name' do
