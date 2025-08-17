@@ -6,7 +6,7 @@ class Parser::EntryTransform < Parslet::Transform
     workout_name: simple(:workout_name),
     pullup_reps: sequence(:pullup_reps),
     details: simple(:details),
-    tags: simple(:tags)
+    tags: subtree(:tags)
   ) do
     FSBCEntry.new(time, workout_name, details, pullup_reps, tags)
   end

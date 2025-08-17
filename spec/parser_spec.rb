@@ -10,10 +10,6 @@ describe Parser do
 EOORG
     end
 
-    it 'detects time' do
-      expect(entry.time).to eq(Time.new(2024, 9, 4, 14, 0))
-    end
-
     it 'detects workout_name' do
       expect(entry.workout_name).to eq('FBSC1')
     end
@@ -29,10 +25,6 @@ EOORG
     it 'detects if support or not' do
       expect(entry).to be_band_support
     end
-
-    it 'detects pullup_reps' do
-      expect(entry.pullup_reps).to eq([8, 8, 8, 7])
-    end
   end
 
   describe '#parse whole org' do
@@ -45,6 +37,7 @@ EOORG
 
 - <2022-03-22 Tue> 2 x 13min @ 2
 - <2022-04-30 Sat> 1 x 10min @ 2 (morning)
+- <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
 
@@ -52,6 +45,7 @@ EOORG
       [
         RowEntry.new('2022-03-22', 2, 13, 2),
         RowEntry.new('2022-04-30', 1, 10, 2, %w(morning)),
+        FSBCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], '2:45min Pause, heiß'),
       ]
     end
 

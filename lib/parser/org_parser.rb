@@ -61,7 +61,7 @@ class Parser::OrgParser < Parslet::Parser
     workout_name.as(:workout_name) >> space >>
       lparen >> pullup_variant.as(:details) >> rparen >> space >>
       reps_sequence.as(:pullup_reps) >> space >>
-      lparen >> pause >> tags.maybe.as(:tags) >> rparen >> newline
+      lparen >> pause >> (comma >> space? >> tags).maybe.as(:tags) >> rparen >> newline
   end
   rule(:bullets)  { bullet.as(:entry).repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
