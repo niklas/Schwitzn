@@ -6,5 +6,6 @@ class Tag < String
     broke_machine
     chinup
     aborted
+    rings
   ).freeze
 end
