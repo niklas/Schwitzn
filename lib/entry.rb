@@ -20,4 +20,9 @@ class Entry
       tags == other.tags &&
       workout_name == other.workout_name
   end
+
+  # Remove Object id
+  def inspect
+    super.sub(/^#([^:]+):0x[0-9a-f]+/i, "\\1")
+  end
 end

@@ -25,6 +25,11 @@ EOORG
     it 'detects if support or not' do
       expect(entry).to be_band_support
     end
+
+    it 'inspects' do
+      # TODO remove typo FSBC -> FBSC
+      expect(entry.inspect).to match(/^<FSBCEntry @time=/)
+    end
   end
 
   describe '#parse whole org' do
