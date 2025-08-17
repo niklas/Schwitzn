@@ -46,12 +46,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:note)       { pause | tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
   rule(:tags)       { (tag >> (comma >> space?).maybe).repeat }
   rule(:tag)        { tag_name.as(:tag) | distance.as(:distance) }
-  rule(:tag_name)   { alt(%w(
-    heiß
-    morning
-    techinique
-    broke_machine
-  ))}
+  rule(:tag_name)   { alt(Tag::ALL) }
   rule(:row_comments) { (row_comment.as(:comment) >> (comma >> space?).maybe).repeat }
   rule(:row_comment) do
     (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min')) |
