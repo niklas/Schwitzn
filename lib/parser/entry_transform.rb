@@ -1,5 +1,6 @@
 class Parser::EntryTransform < Parslet::Transform
   rule(reps: simple(:reps)) { Integer(reps) }
+  rule(distance: { m: simple(:m)}) { Distance.new(m) }
   rule(tag: simple(:tag)) { tag.to_s }
   rule(
     time: simple(:time),

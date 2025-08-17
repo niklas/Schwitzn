@@ -34,12 +34,14 @@ class Parser::OrgParser < Parslet::Parser
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
   rule(:pause)    { d(1,2) >> colon >> d(2) >> str('min Pause') }
   rule(:duration) { d(1,2).as(:duration_min) >> str('min') }
+  rule(:distance) { d(1,6).as(:m) >> str('m') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:pullup_variant) { str('black band, support')}
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
-  rule(:tags)       { (tag.as(:tag) >> (comma >> space?).maybe).repeat }
-  rule(:tag)      { alt(%w(
+  rule(:tags)       { (tag >> (comma >> space?).maybe).repeat }
+  rule(:tag)        { tag_name.as(:tag) | distance.as(:distance) }
+  rule(:tag_name)   { alt(%w(
     heiß
     morning
     techinique
