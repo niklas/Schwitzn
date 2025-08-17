@@ -49,7 +49,8 @@ class Parser::OrgParser < Parslet::Parser
   ))}
   rule(:row_comments) { (row_comment.as(:comment) >> (comma >> space?).maybe).repeat }
   rule(:row_comment) do
-    (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min'))
+    (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min')) |
+      (d(1) >> str(' straight run Ferengi before'))
   end
 
   # Grammar parts
