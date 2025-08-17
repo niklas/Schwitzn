@@ -14,10 +14,4 @@ class Entry < BaseEntry
   def formatted_time
     @time.strftime('%F %T')
   end
-
-  def ==(other)
-    time == other.time &&
-      tags == other.tags &&
-      workout_name == other.workout_name
-  end
 end

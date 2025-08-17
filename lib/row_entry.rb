@@ -13,13 +13,4 @@ class RowEntry < Entry
     @duration = duration
     @level = level
   end
-
-  def ==(other)
-    super(other) &&
-      reps == other.reps &&
-      duration == other.duration &&
-      distance == other.distance &&
-      comments.map(&:to_s) == other.comments.map(&:to_s) &&
-      level == other.level
-  end
 end
