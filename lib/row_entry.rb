@@ -1,22 +1,17 @@
 require 'entry'
-require 'distance'
+require 'commentable'
 
 class RowEntry < Entry
+  include Commentable
   attr_reader :reps
   attr_reader :duration
   attr_reader :level
-  attr_reader :distance
-  attr_reader :comments
 
-  def initialize(time, reps, duration, level, tags = [], distance = nil, comments = nil)
-    distances, tags = (tags || []).partition { |t| t.is_a?(Distance) }
-    comment_tags, tags = (tags || []).partition { |t| t.is_a?(Comment) }
-    super(time, "Rowing", tags)
+  def initialize(time, reps, duration, level, *a)
+    super(time, "Rowing", *a)
     @reps = reps
     @duration = duration
     @level = level
-    @distance = distance || distances.first
-    @comments = comments || comment_tags
   end
 
   def ==(other)

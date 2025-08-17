@@ -68,13 +68,13 @@ class Parser::OrgParser < Parslet::Parser
       times >> space >> duration >> space >>
       at >> space >> d(1).as(:level) >>
       optional_notes_in_parens >>
-      (space >> lparen >> row_comments >> rparen).maybe.as(:comments) >>
+      optional_notes_in_parens >>
       newline
   end
   rule(:bike_workout) do
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
-      str('Fahrrad') >>
+      str('Fahrrad').as(:workout_name) >>
       optional_notes_in_parens >>
       newline
   end

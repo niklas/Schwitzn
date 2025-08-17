@@ -8,19 +8,27 @@ class Parser::EntryTransform < Parslet::Transform
     workout_name: simple(:workout_name),
     pullup_reps: sequence(:pullup_reps),
     details: simple(:details),
-    tags: subtree(:tags)
+    notes: subtree(:notes),
   ) do
-    FBSCEntry.new(time, workout_name, details, pullup_reps, tags)
+    FBSCEntry.new(time, workout_name, details, pullup_reps, notes: notes)
   end
   rule(
     time: simple(:time),
     reps: simple(:reps),
     duration_min: simple(:duration),
     level: simple(:level),
-    tags: subtree(:tags),
-    comments: subtree(:comments),
+    notes: subtree(:notes),
   ) do
-    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level), tags, nil, comments)
+    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level), notes: notes)
+  end
+  rule(
+    workout_name: 'Fahrrad',
+    time: simple(:time),
+    reps: simple(:reps),
+    duration_min: simple(:duration),
+    notes: subtree(:notes),
+  ) do
+    BikeEntry.new(time, Integer(reps), Duration.new(duration), notes: notes)
   end
   rule(
     time: simple(:time),

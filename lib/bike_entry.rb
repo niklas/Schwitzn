@@ -1,14 +1,14 @@
 require 'entry'
+require 'commentable'
 
 class BikeEntry < Entry
+  include Commentable
   attr_reader :reps
   attr_reader :duration
-  attr_reader :comments
 
-  def initialize(time, reps, duration, comments = nil)
-    super(time, 'Fahrrad')
+  def initialize(time, reps, duration, *a)
+    super(time, 'Fahrrad', *a)
     @reps = reps
     @duration = duration
-    @comments = comments
   end
 end
