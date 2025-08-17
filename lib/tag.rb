@@ -7,5 +7,6 @@ class Tag < String
     chinup
     aborted
     rings
+    time
   ).freeze
 end
