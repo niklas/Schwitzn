@@ -8,5 +8,6 @@ class Tag < String
     aborted
     rings
     time
+    almost
   ).freeze
 end
