@@ -45,10 +45,18 @@ class Parser::EntryTransform < Parslet::Transform
     FerengiEntry.new(time, reps: reps, notes: notes)
   end
   rule(
+    workout_name: 'SKIP',
     time: simple(:time),
     text: simple(:text),
   ) do
-    NoEntry.new(time, comments: [text])
+    SkipEntry.new(time, comments: [text])
+  end
+  rule(
+    workout_name: 'ALT',
+    time: simple(:time),
+    text: simple(:text),
+  ) do
+    AltEntry.new(time, comments: [text])
   end
   rule(
     time: simple(:time),

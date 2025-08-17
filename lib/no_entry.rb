@@ -1,3 +1,4 @@
+require 'entry'
 class NoEntry < Entry
   include Commentable
   def initialize(time, **a)

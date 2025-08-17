@@ -79,7 +79,8 @@ class Parser::OrgParser < Parslet::Parser
       newline
   end
   rule(:no_workout) do
-    str('NO -') >> space >>
+    (str('SKIP') | str('ALT')).as(:workout_name) >>
+      str(' -') >> space >>
       rest_of_line.as(:text) >>
       newline
   end
