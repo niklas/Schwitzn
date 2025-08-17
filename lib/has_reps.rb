@@ -3,8 +3,9 @@ module HasReps
     base.attribute :reps
   end
 
-  def initialize(*a, reps: reps)
-    super(*a)
+  def initialize(*_, **a)
+    super
+    reps = a[:reps]
     @reps = reps && Integer(reps)
   end
 end

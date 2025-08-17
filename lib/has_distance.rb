@@ -5,9 +5,10 @@ module HasDistance
     base.attribute :distance
   end
 
-  def initialize(*a, notes: (notes || []), distance: distance)
-    super(*a)
-    distances, _ = (notes || []).partition { |t| t.is_a?(Distance) }
+  def initialize(*_, **a)
+    super
+    distances, _ = (a[:notes] || []).partition { |t| t.is_a?(Distance) }
+    distance = a[:distance]
     @distance = distances.first || (distance && Distance.new(distance))
   end
 end

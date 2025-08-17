@@ -3,9 +3,9 @@ module HasTags
     base.attribute :tags
   end
 
-  def initialize(*a, notes: (notes || []), tags: (tags || []))
-    super(*a)
-    tags_from_notes, _ = (notes || []).partition { |n| n.is_a?(String) }
-    @tags = tags_from_notes + tags
+  def initialize(*_, **a)
+    super
+    tags_from_notes, _ = (a[:notes] || []).partition { |n| n.is_a?(String) }
+    @tags = tags_from_notes + (a[:tags] || [])
   end
 end

@@ -5,9 +5,9 @@ module Commentable
     base.attribute :comments
   end
 
-  def initialize(*a, notes: (notes || []))
-    super(*a)
-    comment_tags, _ = (notes || []).partition { |t| t.is_a?(Comment) }
-    @comments = comments || comment_tags
+  def initialize(*_, **a)
+    super
+    comment_tags, _ = (a[:notes] || []).partition { |t| t.is_a?(Comment) }
+    @comments = a[:comments].presence || comment_tags
   end
 end
