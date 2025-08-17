@@ -74,7 +74,8 @@ class Parser::OrgParser < Parslet::Parser
       newline
   end
   rule(:ferengi_workout) do
-    reps_count.as(:reps) >> space >> str('straight Ferengi') >>
+    reps_count.as(:reps) >> space >>
+      (str('straight Ferengi') | str('straight run Ferengi')) >>
       optional_notes_in_parens.as(:notes) >>
       newline
   end
