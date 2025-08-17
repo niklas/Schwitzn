@@ -1,6 +1,7 @@
 class RowEntry < Entry
   include Commentable
   include HasDistance
+  include HasTags
   attribute :reps
   attribute :duration
   attribute :level

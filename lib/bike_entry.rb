@@ -1,6 +1,7 @@
 class BikeEntry < Entry
   include Commentable
   include HasDistance
+  include HasTags
   attribute :reps
   attribute :duration
 
