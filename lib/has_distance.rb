@@ -7,7 +7,7 @@ module HasDistance
 
   def initialize(*_, **a)
     super
-    distances, _ = (a[:notes] || []).partition { |t| t.is_a?(Distance) }
+    distances = (a[:notes] || []).grep(Distance)
     distance = a[:distance]
     @distance = distances.first || (distance && Distance.new(distance))
   end
