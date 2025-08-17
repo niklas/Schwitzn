@@ -19,6 +19,8 @@ class Measurement < ValueWrapper
   def normalized
     case unit
     when 'km' then count * 1000
+    when 'h' then count * 60 * 60
+    when 'min' then count * 60
     else count
     end
   end

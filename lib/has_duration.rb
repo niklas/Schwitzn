@@ -8,7 +8,6 @@ module HasDuration
   def initialize(*_, **a)
     super
     durations = (a[:notes] || []).grep(Duration)
-    duration = a[:duration]
-    @duration = durations.first || (duration && Duration.new(duration))
+    @duration = durations.first || Duration.wrap(a[:duration])
   end
 end
