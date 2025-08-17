@@ -44,12 +44,14 @@ EOORG
   :END:
 
 - <2022-03-22 Tue> 2 x 13min @ 2
+- <2022-04-30 Sat> 1 x 10min @ 2 (morning)
       EOORG
     end
 
     let(:expected_entries) do
       [
-        RowEntry.new('2022-03-22', 2, 13, 2)
+        RowEntry.new('2022-03-22', 2, 13, 2),
+        RowEntry.new('2022-04-30', 1, 10, 2, %w(morning)),
       ]
     end
 

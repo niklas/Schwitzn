@@ -5,8 +5,8 @@ class RowEntry < Entry
   attr_reader :duration
   attr_reader :level
 
-  def initialize(time, reps, duration, level)
-    super(time, "Rowing")
+  def initialize(time, reps, duration, level, tags = [])
+    super(time, "Rowing", tags)
     @reps = reps
     @duration = duration
     @level = level

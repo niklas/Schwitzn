@@ -9,7 +9,7 @@ class Parser
   end
 
   def entries
-    @entries ||= ast
+    @entries ||= ast.map { |e| e[:entry] }.compact
   end
 
   def ast

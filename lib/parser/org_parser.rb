@@ -38,8 +38,13 @@ class Parser::OrgParser < Parslet::Parser
   rule(:pullup_variant) { str('black band, support')}
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
-  rule(:tags)       { (comma >> space? >> tag).repeat }
-  rule(:tag)      { alt(%w(heiß))}
+  rule(:tags)       { (tag.as(:tag) >> (comma >> space?).maybe).repeat }
+  rule(:tag)      { alt(%w(
+    heiß
+    morning
+    techinique
+    broke_machine
+  ))}
 
   # Grammar parts
   rule(:workout)  { row_workout | complex_workout }
@@ -49,6 +54,7 @@ class Parser::OrgParser < Parslet::Parser
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
       at >> space >> d(1).as(:level) >>
+      (space >> lparen >> tags >> rparen ).maybe.as(:tags) >>
       newline
   end
   rule(:complex_workout)  do
@@ -57,7 +63,7 @@ class Parser::OrgParser < Parslet::Parser
       reps_sequence.as(:pullup_reps) >> space >>
       lparen >> pause >> tags.maybe.as(:tags) >> rparen >> newline
   end
-  rule(:bullets)  { bullet.repeat() }
+  rule(:bullets)  { bullet.as(:entry).repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }
   rule(:org)      { heading.maybe >> org_tags.maybe >> empty_line.repeat >> bullets }
   root(:org)

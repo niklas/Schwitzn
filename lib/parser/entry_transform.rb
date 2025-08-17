@@ -1,5 +1,6 @@
 class Parser::EntryTransform < Parslet::Transform
   rule(reps: simple(:reps)) { Integer(reps) }
+  rule(tag: simple(:tag)) { tag.to_s }
   rule(
     time: simple(:time),
     workout_name: simple(:workout_name),
@@ -13,9 +14,10 @@ class Parser::EntryTransform < Parslet::Transform
     time: simple(:time),
     reps: simple(:reps),
     duration_min: simple(:duration),
-    level: simple(:level)
+    level: simple(:level),
+    tags: subtree(:tags),
   ) do
-    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level))
+    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level), tags)
   end
   rule(
     time: simple(:time),
