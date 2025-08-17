@@ -37,7 +37,7 @@ class Parser
 
     case str
     when %r~<([^>]*)> (FBSC1) \(([^)]+)\) ([0-9-]+)\s?([^)]+)?~
-      FSBCEntry.new(*Regexp.last_match.captures)
+      FBSCEntry.new(*Regexp.last_match.captures)
     else
       out "??? #{str}"
       nil

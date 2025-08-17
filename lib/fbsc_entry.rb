@@ -1,6 +1,7 @@
 require 'entry'
 
-class FSBCEntry < Entry
+# Full Body Strength Circwhatevs
+class FBSCEntry < Entry
   attr_reader :comment
   attr_reader :details
   attr_reader :band_color

@@ -10,7 +10,7 @@ class Parser::EntryTransform < Parslet::Transform
     details: simple(:details),
     tags: subtree(:tags)
   ) do
-    FSBCEntry.new(time, workout_name, details, pullup_reps, tags)
+    FBSCEntry.new(time, workout_name, details, pullup_reps, tags)
   end
   rule(
     time: simple(:time),

@@ -27,8 +27,7 @@ EOORG
     end
 
     it 'inspects' do
-      # TODO remove typo FSBC -> FBSC
-      expect(entry.inspect).to match(/^<FSBCEntry @time=/)
+      expect(entry.inspect).to match(/^<FBSCEntry @time=/)
     end
   end
 
@@ -56,7 +55,7 @@ EOORG
         RowEntry.new('2022-09-10', 2, 6, 3, [], Distance.new(1500)),
         RowEntry.new('2022-09-15', 3, 6, 3, [], Distance.new(2300), ['30s sprint every 2min']),
         RowEntry.new('2022-10-22', 3, 6, 3, [], Distance.new(2420), ['30s sprint every 2min', '2 straight run Ferengi before']),
-        FSBCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], '2:45min Pause, heiß'),
+        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], '2:45min Pause, heiß'),
       ]
     end
 
