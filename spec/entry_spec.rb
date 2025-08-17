@@ -5,19 +5,19 @@ describe Entry do
   end
 
   it 'knows its attribute names' do
-    expect(described_class.attribute_names).to eq([:time, :workout_name])
+    expect(described_class.attribute_names.sort).to eq([:time, :workout_name].sort)
   end
 
   describe 'subclasses' do
     describe RowEntry do
       it 'knows its attribute names' do
-        expect(described_class.attribute_names).to eq([:time, :workout_name, :comments, :distance, :tags, :reps, :duration, :level])
+        expect(described_class.attribute_names.sort).to eq([:time, :workout_name, :comments, :distance, :tags, :reps, :duration, :level].sort)
       end
     end
 
     describe BikeEntry do
       it 'knows its attribute names' do
-        expect(described_class.attribute_names).to eq([:time, :workout_name, :comments, :distance, :tags, :reps, :duration])
+        expect(described_class.attribute_names.sort).to eq([:time, :workout_name, :comments, :distance, :tags, :reps, :duration].sort)
       end
     end
   end

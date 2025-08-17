@@ -1,8 +1,6 @@
-require 'entry'
-require 'commentable'
-
 class RowEntry < Entry
   include Commentable
+  include HasDistance
   attribute :reps
   attribute :duration
   attribute :level
