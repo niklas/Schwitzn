@@ -5,12 +5,12 @@ class Parser::EntryTransform < Parslet::Transform
   rule(tag: simple(:tag)) { tag.to_s }
   rule(
     time: simple(:time),
-    workout_name: simple(:workout_name),
+    workout_name: 'FBSC1',
     pullup_reps: sequence(:pullup_reps),
     details: simple(:details),
     notes: subtree(:notes),
   ) do
-    FBSCEntry.new(time, workout_name, details, pullup_reps, notes: notes)
+    FBSCEntry.new(time, 'FBSC1', details, pullup_reps, notes: notes)
   end
   rule(
     time: simple(:time),

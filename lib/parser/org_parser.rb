@@ -32,7 +32,7 @@ class Parser::OrgParser < Parslet::Parser
                     weekday >> time.maybe }
   rule(:time)     { space? >> d(2) >> colon >> d(2) }
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
-  rule(:pause)    { d(1,2) >> colon >> d(2) >> str('min Pause') }
+  rule(:pause)    { ( d(1,2) >> colon >> d(2) ).as(:pause) >> str('min Pause') }
   rule(:duration) { d(1,2).as(:duration_min) >> str('min') }
   rule(:distance) { d(1,6).as(:m) >> str('m') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
@@ -43,7 +43,7 @@ class Parser::OrgParser < Parslet::Parser
     (space >> lparen >> notes >> rparen ).maybe.as(:notes)
   end
   rule(:notes)      { (note >> (comma >> space?).maybe).repeat }
-  rule(:note)       { tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
+  rule(:note)       { pause | tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
   rule(:tags)       { (tag >> (comma >> space?).maybe).repeat }
   rule(:tag)        { tag_name.as(:tag) | distance.as(:distance) }
   rule(:tag_name)   { alt(%w(
@@ -82,8 +82,9 @@ class Parser::OrgParser < Parslet::Parser
   rule(:complex_workout)  do
     workout_name.as(:workout_name) >> space >>
       lparen >> pullup_variant.as(:details) >> rparen >> space >>
-      reps_sequence.as(:pullup_reps) >> space >>
-      lparen >> pause >> (comma >> space? >> tags).maybe.as(:tags) >> rparen >> newline
+      reps_sequence.as(:pullup_reps) >>
+      optional_notes_in_parens >>
+      newline
   end
   rule(:bullets)  { bullet.as(:entry).repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout }

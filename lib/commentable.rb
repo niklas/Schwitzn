@@ -8,6 +8,7 @@ module Commentable
   end
 
   def initialize(*a, notes: (notes || []))
+    super(*a)
     distances, notes = (notes || []).partition { |t| t.is_a?(Distance) }
     comment_tags, notes = (notes || []).partition { |t| t.is_a?(Comment) }
     @distance = distance || distances.first
