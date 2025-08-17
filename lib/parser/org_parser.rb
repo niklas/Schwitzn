@@ -40,7 +40,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
   rule(:optional_notes_in_parens) do
-    (space >> lparen >> notes >> rparen ).maybe.as(:notes)
+    (space >> lparen >> notes >> rparen ).maybe
   end
   rule(:notes)      { (note >> (comma >> space?).maybe).repeat }
   rule(:note)       { pause | tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
@@ -67,15 +67,15 @@ class Parser::OrgParser < Parslet::Parser
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
       at >> space >> d(1).as(:level) >>
-      optional_notes_in_parens >>
-      optional_notes_in_parens >>
+      optional_notes_in_parens.as(:notes) >>
+      optional_notes_in_parens.as(:notes2) >>
       newline
   end
   rule(:bike_workout) do
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
       str('Fahrrad').as(:workout_name) >>
-      optional_notes_in_parens >>
+      optional_notes_in_parens.as(:notes) >>
       newline
   end
 
@@ -83,7 +83,7 @@ class Parser::OrgParser < Parslet::Parser
     workout_name.as(:workout_name) >> space >>
       lparen >> pullup_variant.as(:details) >> rparen >> space >>
       reps_sequence.as(:pullup_reps) >>
-      optional_notes_in_parens >>
+      optional_notes_in_parens.as(:notes) >>
       newline
   end
   rule(:bullets)  { bullet.as(:entry).repeat() }

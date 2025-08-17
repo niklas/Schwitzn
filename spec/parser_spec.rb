@@ -54,10 +54,10 @@ EOORG
         RowEntry.new('2022-03-22', 13, 2, reps: 2),
         RowEntry.new('2022-04-30', 10, 2, reps: 1, tags: %w(morning)),
         RowEntry.new('2022-09-10', 6, 3, reps: 2, distance: 1500),
-        RowEntry.new('2022-09-15', 6, 3, reps: 3, distance: 2300, notes: ['30s sprint every 2min']),
-        RowEntry.new('2022-10-22', 6, 3, reps: 3, distance: 2420, notes: ['30s sprint every 2min', '2 straight run Ferengi before']),
-        BikeEntry.new('2022-10-26', Duration.new(60, 'min'), reps: 2, notes: ['Lena']),
-        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], notes: ['2:45min Pause', 'heiß']),
+        RowEntry.new('2022-09-15', 6, 3, reps: 3, distance: 2300, comments: ['30s sprint every 2min']),
+        RowEntry.new('2022-10-22', 6, 3, reps: 3, distance: 2420, comments: ['30s sprint every 2min', '2 straight run Ferengi before']),
+        BikeEntry.new('2022-10-26', Duration.new(60, 'min'), reps: 2, comments: ['Lena']),
+        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], comments: ['2:45min Pause'], tags: ['heiß']),
       ]
     end
 
