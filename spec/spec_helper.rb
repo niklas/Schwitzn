@@ -98,3 +98,4 @@ RSpec.configure do |config|
 end
 
 load File.expand_path('../lib/lib.rb', __dir__)
+require 'pry'
