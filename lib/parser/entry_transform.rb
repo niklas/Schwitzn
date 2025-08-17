@@ -19,7 +19,7 @@ class Parser::EntryTransform < Parslet::Transform
     level: simple(:level),
     notes: subtree(:notes),
   ) do
-    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level), notes: notes)
+    RowEntry.new(time, Integer(duration), Integer(level), reps: reps, notes: notes)
   end
   rule(
     workout_name: 'Fahrrad',
@@ -28,7 +28,7 @@ class Parser::EntryTransform < Parslet::Transform
     duration_min: simple(:duration),
     notes: subtree(:notes),
   ) do
-    BikeEntry.new(time, Integer(reps), Duration.new(duration), notes: notes)
+    BikeEntry.new(time, Duration.new(duration), reps: reps, notes: notes)
   end
   rule(
     time: simple(:time),
