@@ -4,5 +4,7 @@ class Tag < String
     morning
     techinique
     broke_machine
+    chinup
+    aborted
   ).freeze
 end

@@ -15,7 +15,7 @@ EOORG
     end
 
     it 'detects details' do
-      expect(entry.details).to eq('black band, support')
+      expect(entry.details).to eq(['black band', 'support'])
     end
 
     it 'detects band color' do
@@ -47,6 +47,7 @@ EOORG
 - <2022-10-26 Wed> 2 x 60min Fahrrad (Lena)
 - <2022-11-22 Tue> 1 straight Ferengi (kein Rudern, Schultern schmerzen)
 - <2022-11-24 Do> NO - Weihnachtsfeier, dann krank
+- <2023-03-13 Mon> FBSC1 (chinup, last round total fail, aborted) 5-2-1-0
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
@@ -61,7 +62,8 @@ EOORG
         BikeEntry.new('2022-10-26', Duration.new(60, 'min'), reps: 2, comments: ['Lena']),
         FerengiEntry.new('2022-11-22', reps: 1, comments: ['kein Rudern', 'Schultern schmerzen']),
         NoEntry.new('2022-11-24', comments: ['Weihnachtsfeier, dann krank']),
-        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], comments: ['2:45min Pause'], tags: ['heiß']),
+        FBSCEntry.new('2023-03-13', 'FBSC1', [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
+        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
       ]
     end
 

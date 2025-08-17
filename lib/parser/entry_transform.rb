@@ -3,14 +3,20 @@ class Parser::EntryTransform < Parslet::Transform
   rule(distance: { m: simple(:m)}) { Distance.new(m) }
   rule(comment: simple(:comment)) { Comment.new(comment) }
   rule(tag: simple(:tag)) { Tag.new(tag) }
+  rule(pause: {
+         min: simple(:min),
+         sec: simple(:sec)
+       }) do
+    Pause.new(min:, sec:)
+  end
   rule(
     time: simple(:time),
     workout_name: 'FBSC1',
     pullup_reps: sequence(:pullup_reps),
-    details: simple(:details),
     notes: subtree(:notes),
+    notes2: subtree(:notes2),
   ) do
-    FBSCEntry.new(time, 'FBSC1', details.to_s, pullup_reps, notes: notes)
+    FBSCEntry.new(time, 'FBSC1', pullup_reps, notes: Array(notes) + Array(notes2))
   end
   rule(
     time: simple(:time),

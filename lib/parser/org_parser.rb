@@ -32,11 +32,10 @@ class Parser::OrgParser < Parslet::Parser
                     weekday >> time.maybe }
   rule(:time)     { space? >> d(2) >> colon >> d(2) }
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
-  rule(:pause)    { ( d(1,2) >> colon >> d(2) ).as(:pause) >> str('min Pause') }
+  rule(:pause)    { ( d(1,2).as(:min) >> colon >> d(2).as(:sec) ).as(:pause) >> str('min Pause') }
   rule(:duration) { d(1,2).as(:duration_min) >> str('min') }
   rule(:distance) { d(1,6).as(:m) >> str('m') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
-  rule(:pullup_variant) { str('black band, support')}
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
   rule(:optional_notes_in_parens) do
@@ -52,10 +51,10 @@ class Parser::OrgParser < Parslet::Parser
     (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min')) |
       (d(1) >> str(' straight run Ferengi before'))
   end
-  rule(:free_comment) { match['A-Za-z0-9ÄÖÜäöüß '].repeat(1) }
+  rule(:free_comment) { match['A-Za-z0-9ÄÖÜäöüß: '].repeat(1) }
 
   # Grammar parts
-  rule(:workout)  { row_workout | bike_workout | ferengi_workout | complex_workout | no_workout }
+  rule(:workout)  { row_workout | bike_workout | ferengi_workout | fbsc_workout | no_workout }
 
   # 2 x 13min @ 2
   rule(:row_workout) do
@@ -85,9 +84,10 @@ class Parser::OrgParser < Parslet::Parser
       newline
   end
 
-  rule(:complex_workout)  do
-    workout_name.as(:workout_name) >> space >>
-      lparen >> pullup_variant.as(:details) >> rparen >> space >>
+  rule(:fbsc_workout)  do
+    workout_name.as(:workout_name) >>
+      optional_notes_in_parens.as(:notes2) >>
+      space? >>
       reps_sequence.as(:pullup_reps) >>
       optional_notes_in_parens.as(:notes) >>
       newline

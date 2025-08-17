@@ -4,14 +4,16 @@ require 'commentable'
 # Full Body Strength Circwhatevs
 class FBSCEntry < Entry
   include Commentable
+  include HasTags
+  include HasPause
   attribute :details
   attribute :band_color
   attribute :pullup_reps
 
-  def initialize(time, workout_name, details, pullup_reps, *a)
-    super(time, workout_name, *a)
+  def initialize(time, workout_name, pullup_reps, **a)
+    super(time, workout_name, **a)
 
-    @details = details
+    @details = comments.grep(/band|support/)
     @pullup_reps = pullup_reps
 
     parse_details
@@ -39,12 +41,13 @@ class FBSCEntry < Entry
   end
 
   def parse_details
-    case @details
-    when /^(black|blue|green|red) band$/
-      @band_color = $1
-    when /^(black|blue|green|red) band, support$/
-      @band_color = $1
-      @band_support = true
+    @details.each do |detail|
+      case detail
+      when /^(black|blue|green|red) band$/
+        @band_color = $1
+      when /^support$/
+        @band_support = true
+      end
     end
   end
 end

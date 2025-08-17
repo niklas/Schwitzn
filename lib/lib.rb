@@ -8,6 +8,7 @@ $LOAD_PATH.push File.expand_path('..', __FILE__)
 require 'has_distance'
 require 'has_tags'
 require 'has_reps'
+require 'has_pause'
 require 'commentable'
 require 'duration'
 require 'entry'
