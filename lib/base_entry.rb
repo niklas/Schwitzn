@@ -14,4 +14,12 @@ class BaseEntry
   def ==(other)
     attribute_names.all? { |a| public_send(a) == other.public_send(a) }
   end
+
+  def attributes
+    {}.tap do |a|
+      attribute_names.each do |n|
+        a[n] = public_send(n)
+      end
+    end
+  end
 end
