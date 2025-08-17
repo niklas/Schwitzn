@@ -39,6 +39,11 @@ class Parser::OrgParser < Parslet::Parser
   rule(:pullup_variant) { str('black band, support')}
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
+  rule(:optional_notes_in_parens) do
+    (space >> lparen >> notes >> rparen ).maybe.as(:notes)
+  end
+  rule(:notes)      { (note >> (comma >> space?).maybe).repeat }
+  rule(:note)       { tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
   rule(:tags)       { (tag >> (comma >> space?).maybe).repeat }
   rule(:tag)        { tag_name.as(:tag) | distance.as(:distance) }
   rule(:tag_name)   { alt(%w(
@@ -52,19 +57,28 @@ class Parser::OrgParser < Parslet::Parser
     (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min')) |
       (d(1) >> str(' straight run Ferengi before'))
   end
+  rule(:free_comment) { match['A-Za-z0-9 '] }
 
   # Grammar parts
-  rule(:workout)  { row_workout | complex_workout }
+  rule(:workout)  { row_workout | bike_workout | complex_workout }
 
   # 2 x 13min @ 2
   rule(:row_workout) do
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
       at >> space >> d(1).as(:level) >>
-      (space >> lparen >> tags >> rparen ).maybe.as(:tags) >>
+      optional_notes_in_parens >>
       (space >> lparen >> row_comments >> rparen).maybe.as(:comments) >>
       newline
   end
+  rule(:bike_workout) do
+    reps_count.as(:reps) >> space >>
+      times >> space >> duration >> space >>
+      str('Fahrrad') >>
+      optional_notes_in_parens >>
+      newline
+  end
+
   rule(:complex_workout)  do
     workout_name.as(:workout_name) >> space >>
       lparen >> pullup_variant.as(:details) >> rparen >> space >>

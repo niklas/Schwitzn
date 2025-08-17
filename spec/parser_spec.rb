@@ -44,6 +44,7 @@ EOORG
 - <2022-09-10 Sat> 2 x 6min @ 3 (1500m)
 - <2022-09-15 Thu> 3 x 6min @ 3 (2300m) (30s sprint every 2min)
 - <2022-10-22 Sat> 3 x 6min @ 3 (2420m) (30s sprint every 2min, 2 straight run Ferengi before)
+- <2022-10-26 Wed> 2 x 60min Fahrrad (Lena)
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
@@ -55,6 +56,7 @@ EOORG
         RowEntry.new('2022-09-10', 2, 6, 3, [], Distance.new(1500)),
         RowEntry.new('2022-09-15', 3, 6, 3, [], Distance.new(2300), ['30s sprint every 2min']),
         RowEntry.new('2022-10-22', 3, 6, 3, [], Distance.new(2420), ['30s sprint every 2min', '2 straight run Ferengi before']),
+        BikeEntry.new('2022-10-26', 2, Duration.new(60, 'min'), ['Lena']),
         FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], '2:45min Pause, heiß'),
       ]
     end
