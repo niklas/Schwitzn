@@ -2,9 +2,9 @@ require 'comment'
 require 'distance'
 module Commentable
   def self.included(base)
-    base.attr_reader :comments
-    base.attr_reader :distance
-    base.attr_reader :tags
+    base.attribute :comments
+    base.attribute :distance
+    base.attribute :tags
   end
 
   def initialize(*a, notes: (notes || []))

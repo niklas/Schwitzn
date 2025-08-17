@@ -1,8 +1,9 @@
 require 'time'
+require 'base_entry'
 
-class Entry
-  attr_reader :time
-  attr_reader :workout_name
+class Entry < BaseEntry
+  attribute :time
+  attribute :workout_name
 
   def initialize(time, workout_name = 'Workout', *rest)
     @time = Time.parse(time) || raise("could not parse time: #{time}")

@@ -3,9 +3,9 @@ require 'commentable'
 
 class RowEntry < Entry
   include Commentable
-  attr_reader :reps
-  attr_reader :duration
-  attr_reader :level
+  attribute :reps
+  attribute :duration
+  attribute :level
 
   def initialize(time, reps, duration, level, *a)
     super(time, "Rowing", *a)

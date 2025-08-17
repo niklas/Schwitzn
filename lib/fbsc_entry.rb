@@ -4,9 +4,9 @@ require 'commentable'
 # Full Body Strength Circwhatevs
 class FBSCEntry < Entry
   include Commentable
-  attr_reader :details
-  attr_reader :band_color
-  attr_reader :pullup_reps
+  attribute :details
+  attribute :band_color
+  attribute :pullup_reps
 
   def initialize(time, workout_name, details, pullup_reps, *a)
     super(time, workout_name, *a)
