@@ -50,6 +50,7 @@ EOORG
 - <2023-03-13 Mon> FBSC1 (chinup, last round total fail, aborted) 5-2-1-0
 - <2023-03-23 Thu> FBSC1 (rings) 8-8-8-8
 - <2023-04-24 Mon> ALT - Frau Zeug hochtragen
+- <2024-07-13 Sat> 35km Fahrrad (heim aus Finkenkrug)
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
@@ -61,12 +62,13 @@ EOORG
         RowEntry.new('2022-09-10', 6, 3, reps: 2, distance: 1500),
         RowEntry.new('2022-09-15', 6, 3, reps: 3, distance: 2300, comments: ['30s sprint every 2min']),
         RowEntry.new('2022-10-22', 6, 3, reps: 3, distance: 2420, comments: ['30s sprint every 2min', '2 straight run Ferengi before']),
-        BikeEntry.new('2022-10-26', Duration.new(60, 'min'), reps: 2, comments: ['Lena']),
+        BikeEntry.new('2022-10-26', duration: 60, reps: 2, comments: ['Lena']),
         FerengiEntry.new('2022-11-22', reps: 1, comments: ['kein Rudern', 'Schultern schmerzen']),
         SkipEntry.new('2022-11-24', comments: ['Weihnachtsfeier, dann krank']),
         FBSCEntry.new('2023-03-13', 'FBSC1', [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
         FBSCEntry.new('2023-03-23', 'FBSC1', [8, 8, 8, 8], tags: %w(rings)),
         AltEntry.new('2023-04-24', comments: ['Frau Zeug hochtragen']),
+        BikeEntry.new('2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
         FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
       ]
     end

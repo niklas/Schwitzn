@@ -1,6 +1,7 @@
 class Parser::EntryTransform < Parslet::Transform
   rule(reps: simple(:reps)) { Integer(reps) }
-  rule(distance: { m: simple(:m)}) { Distance.new(m) }
+  rule(distance: { m: simple(:m)}) { Distance.new(m, 'm') }
+  rule(km: simple(:km)) { Distance.new(km, 'km') }
   rule(comment: simple(:comment)) { Comment.new(comment) }
   rule(tag: simple(:tag)) { Tag.new(tag) }
   rule(pause: {
@@ -35,7 +36,15 @@ class Parser::EntryTransform < Parslet::Transform
     duration_min: simple(:duration),
     notes: subtree(:notes),
   ) do
-    BikeEntry.new(time, Duration.new(duration), reps: reps, notes: notes)
+    BikeEntry.new(time, duration: duration, reps: reps, notes: notes)
+  end
+  rule(
+    workout_name: 'Fahrrad',
+    time: simple(:time),
+    distance: simple(:distance),
+    notes: subtree(:notes),
+  ) do
+    BikeEntry.new(time, distance: distance, notes: notes)
   end
   rule(
     time: simple(:time),

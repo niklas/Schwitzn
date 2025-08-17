@@ -8,7 +8,6 @@ module HasDistance
   def initialize(*_, **a)
     super
     distances = (a[:notes] || []).grep(Distance)
-    distance = a[:distance]
-    @distance = distances.first || (distance && Distance.new(distance))
+    @distance = distances.first || Distance.wrap(a[:distance])
   end
 end

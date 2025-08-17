@@ -1,12 +1,11 @@
 class BikeEntry < Entry
   include Commentable
   include HasDistance
+  include HasDuration
   include HasTags
   include HasReps
-  attribute :duration
 
-  def initialize(time, duration, *a)
-    super(time, 'Fahrrad', *a)
-    @duration = duration
+  def initialize(time, **a)
+    super(time, 'Fahrrad', **a)
   end
 end

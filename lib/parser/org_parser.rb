@@ -34,7 +34,9 @@ class Parser::OrgParser < Parslet::Parser
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
   rule(:pause)    { ( d(1,2).as(:min) >> colon >> d(2).as(:sec) ).as(:pause) >> str('min Pause') }
   rule(:duration) { d(1,2).as(:duration_min) >> str('min') }
-  rule(:distance) { d(1,6).as(:m) >> str('m') }
+  rule(:distance) { distance_m | distance_km }
+  rule(:distance_m) { d(1,6).as(:m) >> str('m') }
+  rule(:distance_km) { d(1,6).as(:km) >> str('km') }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
   rule(:reps_count) { d(1,3) }
@@ -54,7 +56,14 @@ class Parser::OrgParser < Parslet::Parser
   rule(:free_comment) { match['A-Za-z0-9ÄÖÜäöüß: '].repeat(1) }
 
   # Grammar parts
-  rule(:workout)  { row_workout | bike_workout | ferengi_workout | fbsc_workout | no_workout }
+  rule(:workout) do
+    row_workout |
+      bike_workout |
+      bike_distance_workout |
+      ferengi_workout |
+      fbsc_workout |
+      no_workout
+  end
 
   # 2 x 13min @ 2
   rule(:row_workout) do
@@ -68,6 +77,12 @@ class Parser::OrgParser < Parslet::Parser
   rule(:bike_workout) do
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
+      str('Fahrrad').as(:workout_name) >>
+      optional_notes_in_parens.as(:notes) >>
+      newline
+  end
+  rule(:bike_distance_workout) do
+    distance.as(:distance) >> space >>
       str('Fahrrad').as(:workout_name) >>
       optional_notes_in_parens.as(:notes) >>
       newline
