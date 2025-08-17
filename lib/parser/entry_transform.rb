@@ -33,6 +33,13 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     time: simple(:time),
+    reps: simple(:reps),
+    notes: subtree(:notes),
+  ) do
+    FerengiEntry.new(time, reps: reps, notes: notes)
+  end
+  rule(
+    time: simple(:time),
     workout_name: simple(:workout_name)
   ) do
     Entry.new(time, workout_name)

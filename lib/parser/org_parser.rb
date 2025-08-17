@@ -55,7 +55,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:free_comment) { match['A-Za-z0-9 '].repeat(1) }
 
   # Grammar parts
-  rule(:workout)  { row_workout | bike_workout | complex_workout }
+  rule(:workout)  { row_workout | bike_workout | ferengi_workout | complex_workout }
 
   # 2 x 13min @ 2
   rule(:row_workout) do
@@ -70,6 +70,11 @@ class Parser::OrgParser < Parslet::Parser
     reps_count.as(:reps) >> space >>
       times >> space >> duration >> space >>
       str('Fahrrad').as(:workout_name) >>
+      optional_notes_in_parens.as(:notes) >>
+      newline
+  end
+  rule(:ferengi_workout) do
+    reps_count.as(:reps) >> space >> str('straight Ferengi') >>
       optional_notes_in_parens.as(:notes) >>
       newline
   end
