@@ -47,6 +47,10 @@ class Parser::OrgParser < Parslet::Parser
     techinique
     broke_machine
   ))}
+  rule(:row_comments) { (row_comment.as(:comment) >> (comma >> space?).maybe).repeat }
+  rule(:row_comment) do
+    (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min'))
+  end
 
   # Grammar parts
   rule(:workout)  { row_workout | complex_workout }
@@ -57,6 +61,7 @@ class Parser::OrgParser < Parslet::Parser
       times >> space >> duration >> space >>
       at >> space >> d(1).as(:level) >>
       (space >> lparen >> tags >> rparen ).maybe.as(:tags) >>
+      (space >> lparen >> row_comments >> rparen).maybe.as(:comments) >>
       newline
   end
   rule(:complex_workout)  do

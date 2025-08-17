@@ -43,6 +43,7 @@ EOORG
 - <2022-03-22 Tue> 2 x 13min @ 2
 - <2022-04-30 Sat> 1 x 10min @ 2 (morning)
 - <2022-09-10 Sat> 2 x 6min @ 3 (1500m)
+- <2022-09-15 Thu> 3 x 6min @ 3 (2300m) (30s sprint every 2min)
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
@@ -52,6 +53,7 @@ EOORG
         RowEntry.new('2022-03-22', 2, 13, 2),
         RowEntry.new('2022-04-30', 1, 10, 2, %w(morning)),
         RowEntry.new('2022-09-10', 2, 6, 3, [], Distance.new(1500)),
+        RowEntry.new('2022-09-15', 3, 6, 3, [], Distance.new(2300), ['30s sprint every 2min']),
         FSBCEntry.new('2024-09-04Z14:00', 'FBSC1', 'black band, support', [8, 8, 8, 7], '2:45min Pause, heiß'),
       ]
     end

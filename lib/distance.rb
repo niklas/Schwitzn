@@ -9,4 +9,8 @@ class Distance
   def ==(o)
     count == o.count && unit == o.unit
   end
+
+  def inspect
+    %Q(#{count}#{unit})
+  end
 end
