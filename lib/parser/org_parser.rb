@@ -57,7 +57,7 @@ class Parser::OrgParser < Parslet::Parser
     (d(1,2) >> str('s sprint every ') >> d(1,2) >> str('min')) |
       (d(1) >> str(' straight run Ferengi before'))
   end
-  rule(:free_comment) { match['A-Za-z0-9 '] }
+  rule(:free_comment) { match['A-Za-z0-9 '].repeat(1) }
 
   # Grammar parts
   rule(:workout)  { row_workout | bike_workout | complex_workout }

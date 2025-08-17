@@ -10,7 +10,7 @@ class Parser::EntryTransform < Parslet::Transform
     details: simple(:details),
     notes: subtree(:notes),
   ) do
-    FBSCEntry.new(time, 'FBSC1', details, pullup_reps, notes: notes)
+    FBSCEntry.new(time, 'FBSC1', details.to_s, pullup_reps, notes: notes)
   end
   rule(
     time: simple(:time),
