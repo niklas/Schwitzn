@@ -11,6 +11,14 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     time: simple(:time),
+    reps: simple(:reps),
+    duration_min: simple(:duration),
+    level: simple(:level)
+  ) do
+    RowEntry.new(time, Integer(reps), Integer(duration), Integer(level))
+  end
+  rule(
+    time: simple(:time),
     workout_name: simple(:workout_name)
   ) do
     Entry.new(time, workout_name)

@@ -47,8 +47,15 @@ EOORG
       EOORG
     end
 
+    let(:expected_entries) do
+      [
+        RowEntry.new('2022-03-22', 2, 13, 2)
+      ]
+    end
+
+
     it "finds all entries" do
-      expect(entries.length).to eq(1)
+      expect(entries).to eq(expected_entries)
     end
   end
 end

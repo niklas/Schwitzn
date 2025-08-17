@@ -1,5 +1,6 @@
 require 'json'
 require 'fsbc_entry'
+require 'row_entry'
 
 class MakeGraph
   def initialize(org, html)
