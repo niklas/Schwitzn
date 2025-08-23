@@ -7,7 +7,7 @@ module HasDuration
 
   def initialize(*_, **a)
     super
-    durations = (a[:notes] || []).grep(Duration)
+    durations = Array(a[:notes] || []).grep(Duration)
     @duration = durations.first || Duration.wrap(a[:duration])
   end
 end

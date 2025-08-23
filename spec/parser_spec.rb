@@ -65,6 +65,7 @@ EOORG
   squats 3x15@8
   norwegian squats 3x12 @5kg
 - <2025-01-05 Sun 19:30> FRS1
+- <2025-06-29 So 12:30> MAB 20s
       EOORG
     end
 
@@ -95,6 +96,7 @@ EOORG
         Exercise.new(time: '2024-11-12Z20:21', name: 'squats', sets: 3, reps: 15, weight: 8),
         Exercise.new(time: '2024-11-12Z20:21', name: 'norwegian squats', sets: 3, reps: 12, weight: 5),
         NamedWorkout.new(time: '2025-01-05Z19:30', name: 'FRS1'),
+        NamedWorkout.new(time: '2025-06-29Z12:30', name: 'MAB', duration: Duration.new(20, 's')),
       ]
     end
 

@@ -3,6 +3,8 @@ class Parser::EntryTransform < Parslet::Transform
   rule(distance: { m: simple(:m)}) { Distance.new(m, 'm') }
   rule(km: simple(:km)) { Distance.new(km, 'km') }
   rule(kg: simple(:kg)) { Weight.new(kg, 'kg') }
+  rule(duration_s: simple(:s)) { Duration.new(s, 's') }
+  rule(duration_min: simple(:min)) { Duration.new(min, 'min') }
   rule(comment: simple(:comment)) { Comment.new(comment) }
   rule(tag: simple(:tag)) { Tag.new(tag) }
   rule(pause: {
@@ -91,6 +93,13 @@ class Parser::EntryTransform < Parslet::Transform
     exercises: sequence(:exercises),
   ) do
     DetailedWorkout.new(time: time, name: workout_name, exercises: exercises)
+  end
+  rule(
+    time: simple(:time),
+    duration: simple(:duration),
+    workout_name: simple(:workout_name)
+  ) do
+    NamedWorkout.new(time: time, name: workout_name, duration: duration)
   end
   rule(
     time: simple(:time),

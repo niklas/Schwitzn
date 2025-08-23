@@ -37,7 +37,9 @@ class Parser::OrgParser < Parslet::Parser
   rule(:time)     { space? >> d(2) >> colon >> d(2) }
   rule(:weekday)  { alt(%w(Mon Tue Wed Thu Fri Sat Sun Mo Di Mi Do Fr Sa So)) }
   rule(:pause)    { ( d(1,2).as(:min) >> colon >> d(2).as(:sec) ).as(:pause) >> str('min Pause') }
-  rule(:duration) { d(1,2).as(:duration_min) >> str('min') }
+  rule(:duration)   { duration_s | duration_min }
+  rule(:duration_s)   { d(1,2).as(:duration_s) >> str('s') }
+  rule(:duration_min) { d(1,2).as(:duration_min) >> str('min') }
   rule(:distance) { distance_m | distance_km }
   rule(:distance_m) { d(1,6).as(:m) >> str('m') }
   rule(:distance_km) { d(1,6).as(:km) >> str('km') }
@@ -90,7 +92,8 @@ class Parser::OrgParser < Parslet::Parser
       (newline >> exercise).repeat(3).as(:exercises)
   end
   rule(:named_workout) do
-    alt(NamedWorkout::NAMES).as(:workout_name)
+    alt(NamedWorkout::NAMES).as(:workout_name) >>
+      (space >> duration.as(:duration)).maybe
   end
   rule(:bike_workout) do
     reps_count.as(:reps) >> space >>
@@ -115,7 +118,7 @@ class Parser::OrgParser < Parslet::Parser
   end
 
   rule(:fbsc_workout)  do
-    workout_name.as(:workout_name) >>
+    alt(FBSCEntry::NAMES).as(:workout_name) >>
       optional_notes_in_parens.as(:notes2) >>
       space? >>
       reps_sequence.as(:pullup_reps) >>

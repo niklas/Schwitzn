@@ -3,6 +3,9 @@ require 'commentable'
 
 # Full Body Strength Circwhatevs
 class FBSCEntry < Entry
+  NAMES = %w(
+    FBSC1
+  ).freeze
   include Commentable
   include HasTags
   include HasPause
