@@ -4,7 +4,14 @@ class Measurement < ValueWrapper
   attr_reader :count
   attr_reader :unit
   def initialize(count, unit = self.class.default_unit)
-    @count = Integer(count)
+    @count = case count
+             when Numeric
+               count
+             when /^\d+\.\d+$/
+               Float(count)
+             when /^\d+$/
+               Integer(count)
+             end
     @unit = unit
   end
 

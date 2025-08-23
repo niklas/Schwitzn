@@ -7,7 +7,7 @@ module Commentable
 
   def initialize(*_, **a)
     super
-    comment_tags = (a[:notes] || []).grep(Comment)
+    comment_tags = Array(a[:notes] || []).grep(Comment)
     comments = (a[:comments].presence || []).map { |s| Comment.new(s) }
     @comments = comments + comment_tags
   end

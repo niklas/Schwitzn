@@ -5,7 +5,7 @@ class BikeEntry < Entry
   include HasTags
   include HasReps
 
-  def initialize(time, **a)
-    super(time, 'Fahrrad', **a)
+  def initialize(**a)
+    super(name: 'Fahrrad', **a)
   end
 end

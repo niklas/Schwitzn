@@ -10,11 +10,11 @@ class FBSCEntry < Entry
   attribute :band_color
   attribute :pullup_reps
 
-  def initialize(time, workout_name, pullup_reps, **a)
-    super(time, workout_name, **a)
+  def initialize(**a)
+    super(**a)
 
     @details = comments.grep(/band|support/)
-    @pullup_reps = pullup_reps
+    @pullup_reps = a[:pullup_reps]
 
     parse_details
   end

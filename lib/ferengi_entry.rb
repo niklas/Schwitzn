@@ -2,7 +2,7 @@ class FerengiEntry < Entry
   include HasReps
   include Commentable
 
-  def initialize(time, **opts)
-    super(time, 'Ferengi', **opts)
+  def initialize(**opts)
+    super(name: 'Ferengi', **opts)
   end
 end

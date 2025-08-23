@@ -10,8 +10,8 @@ describe Parser do
 EOORG
     end
 
-    it 'detects workout_name' do
-      expect(entry.workout_name).to eq('FBSC1')
+    it 'detects name' do
+      expect(entry.name).to eq('FBSC1')
     end
 
     it 'detects details' do
@@ -53,25 +53,44 @@ EOORG
 - <2024-07-13 Sat> 35km Fahrrad (heim aus Finkenkrug)
 - <2024-09-01 Sun 22:10> BACK1
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
+- <2024-11-12 Tue 20:21> HB1
+  Bankdrücken 3*24 @5.5kg
+  Flys 3x12 @2.5kg
+  Bizeps Curls 3x12 @5.5kg
+  Reverse Flys 3x12 @2.5kg
+  Trizepsdrücken 3x12 @4kg
+  Negatives Bankdrücken 3*12 @5.5kg
+  Zehenspitzen 3x24 BW
+  Zehenziehen 2x12 rotes Band
+  norwegian squats 3x12 @5kg
       EOORG
     end
 
     let(:expected_entries) do
       [
-        RowEntry.new('2022-03-22', 13, 2, reps: 2),
-        RowEntry.new('2022-04-30', 10, 2, reps: 1, tags: %w(morning)),
-        RowEntry.new('2022-09-10', 6, 3, reps: 2, distance: 1500),
-        RowEntry.new('2022-09-15', 6, 3, reps: 3, distance: 2300, comments: ['30s sprint every 2min']),
-        RowEntry.new('2022-10-22', 6, 3, reps: 3, distance: 2420, comments: ['30s sprint every 2min', '2 straight run Ferengi before']),
-        BikeEntry.new('2022-10-26', duration: 60, reps: 2, comments: ['Lena']),
-        FerengiEntry.new('2022-11-22', reps: 1, comments: ['kein Rudern', 'Schultern schmerzen']),
-        SkipEntry.new('2022-11-24', comments: ['Weihnachtsfeier, dann krank']),
-        FBSCEntry.new('2023-03-13', 'FBSC1', [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
-        FBSCEntry.new('2023-03-23', 'FBSC1', [8, 8, 8, 8], tags: %w(rings)),
-        AltEntry.new('2023-04-24', comments: ['Frau Zeug hochtragen']),
-        BikeEntry.new('2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
-        NamedWorkout.new('2024-09-01Z22:10', 'BACK1'),
-        FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
+        RowEntry.new(13, 2, time: '2022-03-22', reps: 2),
+        RowEntry.new(10, 2, time: '2022-04-30', reps: 1, tags: %w(morning)),
+        RowEntry.new( 6, 3, time: '2022-09-10', reps: 2, distance: 1500),
+        RowEntry.new( 6, 3, time: '2022-09-15', reps: 3, distance: 2300, comments: ['30s sprint every 2min']),
+        RowEntry.new( 6, 3, time: '2022-10-22', reps: 3, distance: 2420, comments: ['30s sprint every 2min', '2 straight run Ferengi before']),
+        BikeEntry.new(time: '2022-10-26', duration: 60, reps: 2, comments: ['Lena']),
+        FerengiEntry.new(time: '2022-11-22', reps: 1, comments: ['kein Rudern', 'Schultern schmerzen']),
+        SkipEntry.new(time: '2022-11-24', comments: ['Weihnachtsfeier, dann krank']),
+        FBSCEntry.new(time: '2023-03-13', name: 'FBSC1', pullup_reps: [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
+        FBSCEntry.new(time: '2023-03-23', name: 'FBSC1', pullup_reps: [8, 8, 8, 8], tags: %w(rings)),
+        AltEntry.new(time: '2023-04-24', comments: ['Frau Zeug hochtragen']),
+        BikeEntry.new(time: '2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
+        NamedWorkout.new(time: '2024-09-01Z22:10', name: 'BACK1'),
+        FBSCEntry.new(time: '2024-09-04Z14:00', name: 'FBSC1', pullup_reps: [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Bankdrücken', sets: 3, reps: 24, weight: 5.5),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Flys',        sets: 3, reps: 12, weight: 2.5),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Bizeps Curls', sets: 3, reps: 12, weight: 5.5),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Reverse Flys', sets: 3, reps: 12, weight: 2.5),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Trizepsdrücken', sets: 3, reps: 12, weight: 4),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Negatives Bankdrücken', sets: 3, reps: 12, weight: 5.5),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Zehenspitzen', sets: 3, reps: 24, comments: %w(BW)),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'Zehenziehen', sets: 2, reps: 12, comments: ['rotes Band']),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'norwegian squats', sets: 3, reps: 12, weight: 5),
       ]
     end
 

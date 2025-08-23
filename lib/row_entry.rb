@@ -6,8 +6,8 @@ class RowEntry < Entry
   attribute :duration
   attribute :level
 
-  def initialize(time, duration, level, **a)
-    super(time, "Rowing", **a)
+  def initialize(duration, level, **a)
+    super(**a)
     @duration = duration
     @level = level
   end

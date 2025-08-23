@@ -1,17 +1,11 @@
 require 'time'
 require 'base_entry'
+require 'has_name'
+require 'has_time'
 
 class Entry < BaseEntry
-  attribute :time
-  attribute :workout_name
+  include HasTime
+  include HasName
 
-  def initialize(time, workout_name = 'Workout', *rest)
-    super()
-    @time = Time.parse(time) || raise("could not parse time: #{time}")
-    @workout_name = workout_name
-  end
-
-  def formatted_time
-    @time.strftime('%F %T')
-  end
+  def exercises = [self]
 end

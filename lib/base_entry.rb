@@ -6,6 +6,10 @@ class BaseEntry
     self.attribute_names += [name]
   end
 
+  def initialize(**_)
+    super()
+  end
+
   # Remove Object id
   def inspect
     super.sub(/^#([^:]+):0x[0-9a-f]+/i, "\\1")

@@ -1,7 +1,7 @@
 require 'entry'
 class NoEntry < Entry
   include Commentable
-  def initialize(time, **a)
-    super(time, '---', **a)
+  def initialize(**a)
+    super(name: '---', **a)
   end
 end
