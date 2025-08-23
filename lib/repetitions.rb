@@ -13,6 +13,11 @@ class Repetitions
     end
   end
 
+  def to_i = total
+  def ==(other)
+    to_i == other.to_i
+  end
+
   class Times < Repetitions
     def initialize(sets, n)
       @sets = Repetitions.parse_num(sets)
