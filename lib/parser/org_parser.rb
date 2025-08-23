@@ -51,7 +51,8 @@ class Parser::OrgParser < Parslet::Parser
   rule(:sets_x_reps) { d(1,1).as(:sets) >> times >> d(1,2).as(:reps) | d(1,2).as(:reps) }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:exercise_name) { word.repeat(1) }
-  rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
+  rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(2) }
+  rule(:repetitions) { reps_sequence | sets_x_reps }
   rule(:reps_count) { d(1,3) }
   rule(:optional_notes_in_parens) do
     (space >> lparen >> notes >> rparen ).maybe
@@ -128,7 +129,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:exercise) do
     space >>
       exercise_name.as(:name) >> space >>
-      sets_x_reps.maybe >> space? >>
+      repetitions.maybe.as(:repetitions) >> space? >>
       weight.as(:weight).maybe >>
       space? >> notes.maybe.as(:notes)
   end

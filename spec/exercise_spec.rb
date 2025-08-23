@@ -52,4 +52,12 @@ describe Exercise do
   it 'converts and stores tags' do
     expect(e.tags).to eq([Tag.new('lazy')])
   end
+
+  describe 'reps as a list' do
+    let(:reps) {[8,5,2]}
+    it 'can be a list' do
+      e = described_class.new(reps: reps, time: '2063-12-24')
+      expect(e.reps).to eq(reps)
+    end
+  end
 end

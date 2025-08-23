@@ -73,28 +73,26 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     name: simple(:name),
-    reps: simple(:reps),
-    sets: simple(:sets),
+    repetitions: subtree(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do
-    Exercise.new(time: :parent, name: name, reps: reps, sets: sets, weight: weight, notes: notes)
+    Exercise.new(time: :parent, name: name, reps: repetitions, weight: weight, notes: notes)
   end
   rule(
     name: simple(:name),
-    reps: simple(:reps),
-    sets: simple(:sets),
+    repetitions: subtree(:repetitions),
     notes: subtree(:notes),
   ) do
-    Exercise.new(time: :parent, name: name, reps: reps, sets: sets, notes: notes)
+    Exercise.new(time: :parent, name: name, reps: repetitions, notes: notes)
   end
   rule(
     name: simple(:name),
-    reps: simple(:reps),
+    repetitions: subtree(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do
-    Exercise.new(time: :parent, name: name, reps: reps, weight: weight, notes: notes)
+    Exercise.new(time: :parent, name: name, reps: repetitions, weight: weight, notes: notes)
   end
   rule(
     name: simple(:name),
