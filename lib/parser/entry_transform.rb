@@ -2,6 +2,7 @@ class Parser::EntryTransform < Parslet::Transform
   rule(reps: simple(:reps)) { Integer(reps) }
   rule(distance: { m: simple(:m)}) { Distance.new(m, 'm') }
   rule(km: simple(:km)) { Distance.new(km, 'km') }
+  rule(kg: simple(:kg), times: simple(:times)) { Weight.new(kg, 'kg', times) }
   rule(kg: simple(:kg)) { Weight.new(kg, 'kg') }
   rule(duration_s: simple(:s)) { Duration.new(s, 's') }
   rule(duration_min: simple(:min)) { Duration.new(min, 'min') }
@@ -86,6 +87,21 @@ class Parser::EntryTransform < Parslet::Transform
     notes: subtree(:notes),
   ) do
     Exercise.new(time: :parent, name: name, reps: reps, sets: sets, notes: notes)
+  end
+  rule(
+    name: simple(:name),
+    reps: simple(:reps),
+    weight: simple(:weight),
+    notes: subtree(:notes),
+  ) do
+    Exercise.new(time: :parent, name: name, reps: reps, weight: weight, notes: notes)
+  end
+  rule(
+    name: simple(:name),
+    weight: simple(:weight),
+    notes: subtree(:notes),
+  ) do
+    Exercise.new(time: :parent, name: name, reps: 1, weight: weight, notes: notes)
   end
   rule(
     time: simple(:time),

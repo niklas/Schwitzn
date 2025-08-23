@@ -3,6 +3,7 @@ class DetailedWorkout < Entry
   # Workouts with a list of exercises
   NAMES = %w(
     HB1
+    HB2
   ).freeze
 
   attribute :exercises

@@ -16,7 +16,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:at)       { str('@') }
   rule(:digit)    { match['0-9'] }
   rule(:uppercase_snake) { match['A-Z_'] }
-  rule(:letter)   { match['A-Za-zäöüÄÖÜß'] }
+  rule(:letter)   { match["A-Za-zäöüÄÖÜß'"] }
   rule(:word)      { space? >> letter.repeat(2) }
 
   # Consumers
@@ -43,11 +43,12 @@ class Parser::OrgParser < Parslet::Parser
   rule(:distance) { distance_m | distance_km }
   rule(:distance_m) { d(1,6).as(:m) >> str('m') }
   rule(:distance_km) { d(1,6).as(:km) >> str('km') }
-  rule(:weight)      { weight_kg | weight_k | weight_u }
-  rule(:weight_u)    { at >> (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg)}
-  rule(:weight_k)    { at >> (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg) >> str('k')}
-  rule(:weight_kg)   { at >> (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg) >> str('kg')}
-  rule(:sets_x_reps) { d(1,1).as(:sets) >> times >> d(1,2).as(:reps) }
+  rule(:weight)      { at >> (n_times_weight | weight_kg | weight_k | weight_u) }
+  rule(:weight_u)    { (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg)}
+  rule(:weight_k)    { (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg) >> str('k')}
+  rule(:weight_kg)   { (d(1,2) >> (dot >> d(1,2)).maybe).as(:kg) >> str('kg')}
+  rule(:n_times_weight) { d(1,1).as(:times) >> times >> weight_kg }
+  rule(:sets_x_reps) { d(1,1).as(:sets) >> times >> d(1,2).as(:reps) | d(1,2).as(:reps) }
   rule(:workout_name) { match['A-Z'].repeat(2) >> digit.maybe }
   rule(:exercise_name) { word.repeat(1) }
   rule(:reps_sequence) { (reps_count.as(:reps) >> dash.maybe).repeat(1) }
@@ -127,7 +128,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:exercise) do
     space >>
       exercise_name.as(:name) >> space >>
-      sets_x_reps >> space? >>
+      sets_x_reps.maybe >> space? >>
       weight.as(:weight).maybe >>
       space? >> notes.maybe.as(:notes)
   end

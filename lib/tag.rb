@@ -9,5 +9,6 @@ class Tag < String
     rings
     time
     almost
+    nogrip
   ).freeze
 end

@@ -6,6 +6,6 @@ module HasReps
   def initialize(*_, **a)
     super
     reps = a[:reps]
-    @reps = reps && Integer(reps)
+    @reps = reps && Integer(reps) || 1
   end
 end

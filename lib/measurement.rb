@@ -3,7 +3,8 @@ require 'value_wrapper'
 class Measurement < ValueWrapper
   attr_reader :count
   attr_reader :unit
-  def initialize(count, unit = self.class.default_unit)
+  attr_reader :mult
+  def initialize(count, unit = self.class.default_unit, mult = 1)
     @count = case count
              when Numeric
                count
@@ -13,6 +14,7 @@ class Measurement < ValueWrapper
                Integer(count)
              end
     @unit = unit
+    @mult = Integer(mult)
   end
 
   def ==(o)
@@ -20,16 +22,24 @@ class Measurement < ValueWrapper
   end
 
   def inspect
-    %Q(#{count}#{unit})
+    if mult == 1
+      %Q(#{count}#{unit})
+    else
+      %Q(#{mult}x#{count}#{unit})
+    end
   end
 
   def normalized
     case unit
-    when 'km' then count * 1000
-    when 'h' then count * 60 * 60
-    when 'min' then count * 60
-    else count
+    when 'km' then total * 1000
+    when 'h' then total * 60 * 60
+    when 'min' then total * 60
+    else total
     end
+  end
+
+  def total
+    count * mult
   end
 
   def self.default_unit = 'units'
