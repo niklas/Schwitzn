@@ -1,5 +1,7 @@
 class Parser::EntryTransform < Parslet::Transform
-  rule(reps: simple(:reps)) { Integer(reps) }
+  rule(reps: simple(:reps), sets: simple(:reps)) { Repetitions.wrap(sets, reps) }
+  rule(reps: sequence(:reps)) { Repetitions.wrap(reps) }
+  rule(reps: simple(:reps)) { Repetitions.wrap(reps) }
   rule(distance: { m: simple(:m)}) { Distance.new(m, 'm') }
   rule(km: simple(:km)) { Distance.new(km, 'km') }
   rule(kg: simple(:kg), times: simple(:times)) { Weight.new(kg, 'kg', times) }
@@ -73,7 +75,7 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     name: simple(:name),
-    repetitions: subtree(:repetitions),
+    repetitions: simple(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do
@@ -81,14 +83,14 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     name: simple(:name),
-    repetitions: subtree(:repetitions),
+    repetitions: simple(:repetitions),
     notes: subtree(:notes),
   ) do
     Exercise.new(time: :parent, name: name, reps: repetitions, notes: notes)
   end
   rule(
     name: simple(:name),
-    repetitions: subtree(:repetitions),
+    repetitions: simple(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do
