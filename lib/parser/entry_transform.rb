@@ -75,7 +75,7 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     name: simple(:name),
-    repetitions: simple(:repetitions),
+    repetitions: subtree(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do
@@ -83,14 +83,14 @@ class Parser::EntryTransform < Parslet::Transform
   end
   rule(
     name: simple(:name),
-    repetitions: simple(:repetitions),
+    repetitions: subtree(:repetitions),
     notes: subtree(:notes),
   ) do
     Exercise.new(time: :parent, name: name, reps: repetitions, notes: notes)
   end
   rule(
     name: simple(:name),
-    repetitions: simple(:repetitions),
+    repetitions: subtree(:repetitions),
     weight: simple(:weight),
     notes: subtree(:notes),
   ) do

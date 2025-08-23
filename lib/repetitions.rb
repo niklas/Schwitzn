@@ -3,12 +3,19 @@ class Repetitions
     if second
       Times.new(first, second)
     else
-      if first.is_a?(Repetitions)
+      case first
+      when Repetitions
         first
-      elsif first.is_a?(Enumerable)
+      when Array
         Sequence.new(first)
-      else
+      when Hash
+        Times.new(first[:sets], first[:reps])
+      when Integer
         One.new(first)
+      when /^\d+$/
+        One.new(first)
+      else
+        raise ArgumentError.new("unsupported repetition: #{first}")
       end
     end
   end
