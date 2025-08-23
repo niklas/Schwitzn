@@ -2,4 +2,4 @@
 
 set -eu
 
-find bin lib spec | entr -c bundle exec rspec
+find bin lib spec | entr -c bundle exec rspec $@
