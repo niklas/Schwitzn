@@ -51,6 +51,7 @@ EOORG
 - <2023-03-23 Thu> FBSC1 (rings) 8-8-8-8
 - <2023-04-24 Mon> ALT - Frau Zeug hochtragen
 - <2024-07-13 Sat> 35km Fahrrad (heim aus Finkenkrug)
+- <2024-09-01 Sun 22:10> BACK1
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
       EOORG
     end
@@ -69,6 +70,7 @@ EOORG
         FBSCEntry.new('2023-03-23', 'FBSC1', [8, 8, 8, 8], tags: %w(rings)),
         AltEntry.new('2023-04-24', comments: ['Frau Zeug hochtragen']),
         BikeEntry.new('2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
+        NamedWorkout.new('2024-09-01Z22:10', 'BACK1'),
         FBSCEntry.new('2024-09-04Z14:00', 'FBSC1', [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
       ]
     end

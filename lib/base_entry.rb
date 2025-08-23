@@ -12,6 +12,7 @@ class BaseEntry
   end
 
   def ==(other)
+    self.class == other.class &&
     attribute_names.all? { |a| public_send(a) == other.public_send(a) }
   end
 

@@ -62,6 +62,7 @@ class Parser::OrgParser < Parslet::Parser
       bike_distance_workout |
       ferengi_workout |
       fbsc_workout |
+      named_workout |
       no_workout
   end
 
@@ -73,6 +74,9 @@ class Parser::OrgParser < Parslet::Parser
       optional_notes_in_parens.as(:notes) >>
       optional_notes_in_parens.as(:notes2) >>
       newline
+  end
+  rule(:named_workout) do
+    alt(NamedWorkout::NAMES).as(:workout_name) >> newline
   end
   rule(:bike_workout) do
     reps_count.as(:reps) >> space >>

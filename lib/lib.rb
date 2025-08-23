@@ -5,6 +5,7 @@ require 'active_support/core_ext/class/attribute'
 require 'active_support/core_ext/object/blank'
 
 $LOAD_PATH.push File.expand_path('..', __FILE__)
+require 'named_workout'
 require 'has_distance'
 require 'has_tags'
 require 'has_reps'
