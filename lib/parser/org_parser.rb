@@ -90,7 +90,7 @@ class Parser::OrgParser < Parslet::Parser
   end
   rule(:detailed_workout) do
     alt(DetailedWorkout::NAMES).as(:workout_name) >>
-      (newline >> exercise).repeat(3).as(:exercises)
+      (newline >> exercise).repeat(1).as(:exercises)
   end
   rule(:named_workout) do
     alt(NamedWorkout::NAMES).as(:workout_name) >>

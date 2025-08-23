@@ -10,5 +10,7 @@ class Tag < String
     time
     almost
     nogrip
+    sim
+    badform-left
   ).freeze
 end

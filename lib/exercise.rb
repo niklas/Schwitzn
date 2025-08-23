@@ -5,6 +5,7 @@ class Exercise < Entry
   include HasReps
   include HasTags
   include HasTime
+  include HasSets
 
   def belongs_to(parent)
     @time = parent.time if time == :parent

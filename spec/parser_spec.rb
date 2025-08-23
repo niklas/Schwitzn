@@ -81,6 +81,8 @@ EOORG
   Rows 12@15.75kg
   Negatives Bankdrücken 12@15.75kg
   Farmer's Walk @2x15.75kg nogrip
+- <2025-08-09 Sa 17:30> KBS
+  Kettlebell Swing 3x20 @8kg
       EOORG
     end
 
@@ -126,6 +128,7 @@ EOORG
         Exercise.new(time: '2025-07-07Z19:40', name: 'Rows', reps: 12, weight: 15.75),
         Exercise.new(time: '2025-07-07Z19:40', name: 'Negatives Bankdrücken', reps: 12, weight: 15.75),
         Exercise.new(time: '2025-07-07Z19:40', name: "Farmer's Walk", weight: Weight.new(15.75, 'kg', 2), tags: %w(nogrip)),
+        Exercise.new(time: '2025-08-09Z17:30', name: "Kettlebell Swing", sets: 3, reps: 20, weight: 8)
       ]
     end
 
