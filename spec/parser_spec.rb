@@ -62,6 +62,7 @@ EOORG
   Negatives Bankdrücken 3*12 @5.5kg
   Zehenspitzen 3x24 BW
   Zehenziehen 2x12 rotes Band
+  squats 3x15@8
   norwegian squats 3x12 @5kg
       EOORG
     end
@@ -90,6 +91,7 @@ EOORG
         Exercise.new(time: '2024-11-12Z20:21', name: 'Negatives Bankdrücken', sets: 3, reps: 12, weight: 5.5),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Zehenspitzen', sets: 3, reps: 24, comments: %w(BW)),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Zehenziehen', sets: 2, reps: 12, comments: ['rotes Band']),
+        Exercise.new(time: '2024-11-12Z20:21', name: 'squats', sets: 3, reps: 15, weight: 8),
         Exercise.new(time: '2024-11-12Z20:21', name: 'norwegian squats', sets: 3, reps: 12, weight: 5),
       ]
     end
