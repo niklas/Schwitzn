@@ -37,13 +37,13 @@ class FBSCEntry < Entry
   def color_in_set(set, total)
     @color ||= case band_color
                when 'green'
-                 'rgba(10,200,10,1)'
+                 Color.green
                when 'blue'
-                 'rgba(10,10,200,1)'
+                 Color.blue
                when 'black'
-                 'rgba(110,110,110,1)'
+                 Color.black
                when nil # no band
-                 'rgba(186,165,121, 0.3)' # skin color
+                 Color.skin
                else
                  raise "cannot find color_in_set for #{band_color}\n#{inspect}"
                end

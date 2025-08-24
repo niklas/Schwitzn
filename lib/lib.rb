@@ -1,11 +1,14 @@
 require 'bundler/setup'
 
 require 'parslet'
+require 'json'
+require 'erb'
 require 'active_support/core_ext/class/attribute'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
 
 $LOAD_PATH.push File.expand_path('..', __FILE__)
+require 'color'
 require 'repetitions'
 require 'named_workout'
 require 'detailed_workout'

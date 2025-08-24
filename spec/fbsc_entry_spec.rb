@@ -24,7 +24,7 @@ describe FBSCEntry do
     end
 
     it 'has colored black' do
-      expect(e.color_in_set(1,4)).to eq('rgba(110,110,110,1)')
+      expect(e.color_in_set(1,4)).to eq(Color.black)
     end
 
     it 'knows I needed support by band' do

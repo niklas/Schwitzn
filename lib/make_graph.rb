@@ -1,8 +1,3 @@
-require 'json'
-require 'erb'
-require 'fbsc_entry'
-require 'row_entry'
-
 class MakeGraph
   def initialize(org, html)
     @org = org
@@ -54,16 +49,16 @@ class MakeGraph
         data: data,
         layout:  {
           title: name,
-          paper_bgcolor: 'transparent',
-          plot_bgcolor: 'transparent',
+          paper_bgcolor: Color.transparent,
+          plot_bgcolor: Color.transparent,
           font: {
-            color: '#ddeddd',
+            color: Color.text,
           },
           xaxis: {
             tickangle: -45,
           },
           yaxis: {
-            gridcolor: '#333333',
+            gridcolor: Color.grid,
           },
           showlegend: false,
           barmode: 'stack'
@@ -90,9 +85,9 @@ class MakeGraph
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
     <style>
       :root {
-        --bg: #111811;
-        --text: #dddddd;
-        --links: #ddffdd;
+        --bg: <%= Color.background %>;
+        --text: <%= Color.text %>;
+        --links: <%= Color.links %>;
       }
       body {
         background-color: var(--bg);
