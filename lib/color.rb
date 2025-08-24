@@ -36,6 +36,10 @@ class Color
       '#ddffdd'
     end
 
+    def button
+      '#444444'
+    end
+
     def background
       '#111811'
     end

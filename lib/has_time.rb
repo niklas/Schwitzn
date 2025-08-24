@@ -12,6 +12,10 @@ module HasTime
   end
 
   def formatted_time
-    @time.strftime('%F %T')
+    HasTime.format(@time)
+  end
+
+  def self.format(time)
+    time.strftime('%F %T')
   end
 end

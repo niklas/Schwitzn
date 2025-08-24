@@ -33,6 +33,12 @@ class MakeGraph
     opa_base = 1
     @graphs = @by_name.map do |name, entries|
       num_sets = entries.map { |e| e.reps.to_a.length }.max
+      newest = entries.map(&:time).max || Time.now
+      oldest = entries.map(&:time).min || Time.now
+      oldest_seen = [newest - 300.days, oldest].max
+      full_range = [oldest, newest].map { |t| HasTime.format(t) }
+      default_range = [oldest_seen, newest].map { |t| HasTime.format(t) }
+
       data = 1.upto(num_sets).map do |set|
         { x: entries.map(&:formatted_time),
           y: entries.map { |e| e.reps_in_set(set) },
@@ -45,6 +51,7 @@ class MakeGraph
           type: 'bar',
         }
       end
+
       {
         id: name.gsub(/\W/, '_'),
         name: name,
@@ -57,8 +64,37 @@ class MakeGraph
             color: Color.text,
           },
           xaxis: {
+            range: default_range,
             type: 'date',
             tickangle: -45,
+            rangeslider: { range: full_range },
+            rangeselector: {
+              bgcolor: Color.button,
+              font: {
+                color: Color.links,
+              },
+              buttons: [
+                {step: 'all'},
+                {
+                  count: 24,
+                  label: '2y',
+                  step: 'month',
+                  stepmode: 'backward'
+                },
+                {
+                  count: 12,
+                  label: '1y',
+                  step: 'month',
+                  stepmode: 'backward'
+                },
+                {
+                  count: 6,
+                  label: '6m',
+                  step: 'month',
+                  stepmode: 'backward'
+                },
+              ]
+            },
           },
           yaxis: {
             fixedrange: true,

@@ -6,6 +6,7 @@ require 'erb'
 require 'active_support/core_ext/class/attribute'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/numeric/time'
 
 $LOAD_PATH.push File.expand_path('..', __FILE__)
 require 'color'
