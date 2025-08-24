@@ -18,4 +18,8 @@ module HasReps
               Repetitions.none
             end
   end
+
+  def size_of_set(set)
+    reps_in_set(set)
+  end
 end

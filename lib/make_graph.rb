@@ -43,7 +43,7 @@ class MakeGraph
 
       data = 1.upto(num_sets).map do |set|
         { x: entries.map(&:formatted_time),
-          y: entries.map { |e| e.reps_in_set(set) },
+          y: entries.map { |e| e.size_of_set(set) },
           hovertext: entries.map(&:comment),
           marker: {
             color: entries.map { |e| e.color_in_set(set, num_sets) },

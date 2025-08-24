@@ -41,5 +41,12 @@ describe FBSCEntry do
       expect(e.reps_in_set(3)).to eq(8)
       expect(e.reps_in_set(4)).to eq(7)
     end
+
+    it 'has size_of_set (scaled down because of black band)' do
+      expect(e.size_of_set(1)).to eq(0.9 * 8)
+      expect(e.size_of_set(2)).to eq(0.9 * 8)
+      expect(e.size_of_set(3)).to eq(0.9 * 8)
+      expect(e.size_of_set(4)).to eq(0.9 * 7)
+    end
   end
 end

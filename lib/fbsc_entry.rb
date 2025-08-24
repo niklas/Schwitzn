@@ -6,6 +6,13 @@ class FBSCEntry < Entry
   NAMES = %w(
     FBSC1
   ).freeze
+  BAND_FACTOR = {
+    'red'   => 0.95,
+    'black' => 0.9,
+    'blue'  => 0.8,
+    'green' => 0.7,
+  }.freeze
+
   include Commentable
   include HasTags
   include HasPause
@@ -24,12 +31,24 @@ class FBSCEntry < Entry
     parse_details
   end
 
+  def size_of_set(set)
+    reps_in_set(set) * band_factor
+  end
+
   def reps
     @reps ||= Repetitions.wrap(@pullup_reps)
   end
 
   def band_support?
     @band_support
+  end
+
+  def band_factor
+    if band_support?
+      BAND_FACTOR[band_color] || 1.0
+    else
+      1.0
+    end
   end
 
   def color_in_set(set, total)
