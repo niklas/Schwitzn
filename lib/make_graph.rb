@@ -54,8 +54,16 @@ class MakeGraph
         data: data,
         layout:  {
           title: name,
+          paper_bgcolor: 'transparent',
+          plot_bgcolor: 'transparent',
+          font: {
+            color: '#ddeddd',
+          },
           xaxis: {
             tickangle: -45,
+          },
+          yaxis: {
+            gridcolor: '#333333',
           },
           showlegend: false,
           barmode: 'stack'
@@ -81,13 +89,47 @@ class MakeGraph
     <title>Sport <%= Time.now %></title>
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
     <style>
+      :root {
+        --bg: #111811;
+        --text: #dddddd;
+        --links: #ddffdd;
+      }
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+      }
+      body a {
+        color: var(--links);
+      }
       .plot {
             width: 90vw;
             height: 90vh;
       }
+      aside#navigation {
+        position: fixed;
+        font-size: 120%;
+        right: 0;
+        top: 0;
+        background-color: #000000DD;
+        padding: 1rem 2rem;
+        z-index: 1;
+        border-bottom-color: white;
+        border-left-color: white;
+        border-width: 0 0 1px 1px;
+        border-bottom-left-radius: 0.5em;
+        border-style: solid;
+      }
+      aside#navigation a {
+        display: block;
+      }
     </style>
   </head>
   <body>
+    <aside id="navigation"><nav>
+      <% @graphs.each do |graph|  %>
+        <a href="#<%= graph[:id] %>"><%= graph[:name] %></a>
+      <% end %>
+    </nav></aside>
     <% @graphs.each do |graph|  %>
       <div id="<%= graph[:id] %>" class="plot"></div>
       <script>
