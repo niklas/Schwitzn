@@ -22,6 +22,10 @@ class FBSCEntry < Entry
     parse_details
   end
 
+  def reps
+    @reps ||= Repetitions.wrap(@pullup_reps)
+  end
+
   def band_support?
     @band_support
   end

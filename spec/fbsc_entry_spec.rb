@@ -30,5 +30,9 @@ describe FBSCEntry do
     it 'knows I needed support by band' do
       expect(e).to be_band_support
     end
+
+    it 'has reps' do
+      expect(e.reps.to_a).to eq([8, 8, 8, 7])
+    end
   end
 end
