@@ -85,6 +85,10 @@ EOORG
   Farmer's Walk @2x15.75kg nogrip
 - <2025-08-09 Sa 17:30> KBS
   Kettlebell Swing 3x20 @8kg
+
+* Workout Ideas
+** MOM
+Meet only Milfs, ignore please
       EOORG
     end
 

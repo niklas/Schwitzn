@@ -135,7 +135,9 @@ class Parser::OrgParser < Parslet::Parser
   end
   rule(:bullets)  { bullet.as(:entry).repeat() }
   rule(:bullet)   { str('-') >> space >> org_date >> space >> workout >> newline }
-  rule(:org)      { heading.maybe >> org_tags.maybe >> empty_line.repeat >> bullets }
+  rule(:workout_list) { heading.maybe >> org_tags.maybe >> empty_line.repeat >> bullets }
+  rule(:ignored_tail) { str('*') >> any.repeat }
+  rule(:org)      { workout_list >> empty_line.repeat >> ignored_tail.maybe }
   root(:org)
 
   def d(*n)
