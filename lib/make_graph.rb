@@ -42,7 +42,7 @@ class MakeGraph
             opacity: (set + opa_base).to_f / (num_sets + opa_base),
           },
           name: "Set #{set}",
-          type: 'bar'
+          type: 'bar',
         }
       end
       {
@@ -57,6 +57,7 @@ class MakeGraph
             color: Color.text,
           },
           xaxis: {
+            type: 'date',
             tickangle: -45,
           },
           yaxis: {
