@@ -71,7 +71,6 @@ class MakeGraph
   <body>
     <div id="fsbc"></div>
     <script>
-      const fsbc = document.getElementById('fsbc');
       Plotly.newPlot(fsbc, #{data.to_json}, #{layout.to_json}, {responsive: true});
     </script>
   </body>
