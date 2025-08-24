@@ -7,7 +7,9 @@ class MakeGraph
   def run
     build_graphs
     @title = "Sport #{Time.now}"
-    @livereload = %Q[<script src="http://localhost:51754/livereload.js"></script>]
+    @livereload = if @html =~ /dev.html/
+                    %Q[<script src="http://localhost:51754/livereload.js"></script>]
+                  end
     File.open(@html, 'w') do |f|
       f.write render_template
     end
