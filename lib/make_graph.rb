@@ -102,7 +102,7 @@ class MakeGraph
         color: var(--links);
       }
       .plot {
-            width: 90vw;
+            width: 95vw;
             height: 90vh;
       }
       aside#navigation {
@@ -121,6 +121,9 @@ class MakeGraph
       }
       aside#navigation a {
         display: block;
+      }
+      body:has(.plot:hover) aside#navigation {
+        display: none;
       }
     </style>
   </head>
