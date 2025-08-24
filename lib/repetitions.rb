@@ -20,6 +20,10 @@ class Repetitions
     end
   end
 
+  def self.none
+    One.new(0)
+  end
+
   def to_i = total
   def ==(other)
     to_i == other.to_i

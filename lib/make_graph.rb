@@ -9,14 +9,24 @@ class MakeGraph
   end
 
   def run
-    out "parsing #{@org}"
-    @entries = Parser.new(File.read(@org)).entries
-    out "found #{@entries.size} entries"
+    @entries = find_entries
 
     File.open(@html, 'w') do |f|
       f.write render_template
     end
     out "Generated #{@html}"
+  end
+
+  def find_entries
+    out "parsing #{@org}"
+    all_entries = Parser.new(File.read(@org)).entries
+    out "found #{all_entries.size} entries"
+    entries = all_entries
+                .grep_v(SkipEntry)
+                .grep_v(AltEntry)
+                .grep_v(NamedWorkout)
+    out "considering #{entries.size} entries"
+    entries
   end
 
   def render_template

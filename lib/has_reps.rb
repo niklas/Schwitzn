@@ -14,6 +14,8 @@ module HasReps
               else
                 Repetitions.wrap(reps)
               end
+            else
+              Repetitions.none
             end
   end
 end
