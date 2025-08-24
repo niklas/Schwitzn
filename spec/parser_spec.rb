@@ -50,6 +50,7 @@ EOORG
 - <2023-03-13 Mon> FBSC1 (chinup, last round total fail, aborted) 5-2-1-0
 - <2023-03-23 Thu> FBSC1 (rings) 8-8-8-8
 - <2023-04-24 Mon> ALT - Frau Zeug hochtragen
+- <2023-06-02 Fri 09:00> FBSC1 (green band, support) 8-0 (aborted, time)
 - <2024-07-13 Sat> 35km Fahrrad (heim aus Finkenkrug)
 - <2024-09-01 Sun 22:10> BACK1
 - <2024-09-04 Wed 14:00> FBSC1 (black band, support) 8-8-8-7 (2:45min Pause, heiß)
@@ -100,6 +101,7 @@ EOORG
         FBSCEntry.new(time: '2023-03-13', name: 'FBSC1', pullup_reps: [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
         FBSCEntry.new(time: '2023-03-23', name: 'FBSC1', pullup_reps: [8, 8, 8, 8], tags: %w(rings)),
         AltEntry.new(time: '2023-04-24', comments: ['Frau Zeug hochtragen']),
+        FBSCEntry.new(time: '2023-06-02Z09:00', name: 'FBSC1', pullup_reps: [8,0], comments: ['green band', 'support'], tags: %w(aborted time)),
         BikeEntry.new(time: '2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
         NamedWorkout.new(time: '2024-09-01Z22:10', name: 'BACK1'),
         FBSCEntry.new(time: '2024-09-04Z14:00', name: 'FBSC1', pullup_reps: [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
