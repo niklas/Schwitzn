@@ -15,7 +15,11 @@ EOORG
     end
 
     it 'detects details' do
-      expect(entry.details).to eq(['black band', 'support'])
+      expect(entry.details).to eq(['black band'])
+    end
+
+    it 'detects tags' do
+      expect(entry.tags).to eq(['heiß', 'support'])
     end
 
     it 'detects band color' do
@@ -105,10 +109,10 @@ Meet only Milfs, ignore please
         FBSCEntry.new(time: '2023-03-13', name: 'FBSC1', pullup_reps: [5, 2, 1, 0], comments: ['last round total fail'], tags: %w(chinup aborted)),
         FBSCEntry.new(time: '2023-03-23', name: 'FBSC1', pullup_reps: [8, 8, 8, 8], tags: %w(rings)),
         AltEntry.new(time: '2023-04-24', comments: ['Frau Zeug hochtragen']),
-        FBSCEntry.new(time: '2023-06-02Z09:00', name: 'FBSC1', pullup_reps: [8,0], comments: ['green band', 'support'], tags: %w(aborted time)),
+        FBSCEntry.new(time: '2023-06-02Z09:00', name: 'FBSC1', pullup_reps: [8,0], comments: ['green band'], tags: %w(aborted time support)),
         BikeEntry.new(time: '2024-07-13', distance: 35000, comments: ['heim aus Finkenkrug']),
         NamedWorkout.new(time: '2024-09-01Z22:10', name: 'BACK1'),
-        FBSCEntry.new(time: '2024-09-04Z14:00', name: 'FBSC1', pullup_reps: [8, 8, 8, 7], comments: ['black band', 'support'], tags: ['heiß'], pause: Pause.new(min: 2, sec: 45)),
+        FBSCEntry.new(time: '2024-09-04Z14:00', name: 'FBSC1', pullup_reps: [8, 8, 8, 7], comments: ['black band'], tags: ['heiß', 'support'], pause: Pause.new(min: 2, sec: 45)),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Bankdrücken', sets: 3, reps: 24, weight: 5.5),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Flys',        sets: 3, reps: 12, weight: 2.5),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Bizeps Curls', sets: 3, reps: 12, weight: 5.5),

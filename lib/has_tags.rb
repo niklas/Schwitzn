@@ -11,4 +11,8 @@ module HasTags
     tags = (a[:tags].presence || []).map { |s| Tag.new(s) }
     @tags = tags_from_notes + tags
   end
+
+  def has_tag?(needle)
+    @tags.include?(needle)
+  end
 end

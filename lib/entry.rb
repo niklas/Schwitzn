@@ -8,4 +8,8 @@ class Entry < BaseEntry
   include HasName
 
   def exercises = [self]
+
+  def color_in_set(_set, _total)
+    'rgba(42,42,42,1)'
+  end
 end

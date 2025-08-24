@@ -12,5 +12,6 @@ class Tag < String
     nogrip
     sim
     badform-left
+    support
   ).freeze
 end
