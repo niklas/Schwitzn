@@ -110,6 +110,12 @@ class MakeGraph
                   step: 'month',
                   stepmode: 'backward'
                 },
+                {
+                  count: 2,
+                  label: '2m',
+                  step: 'month',
+                  stepmode: 'backward'
+                },
               ]
             },
           },
