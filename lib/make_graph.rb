@@ -1,4 +1,5 @@
 require 'json'
+require 'erb'
 require 'fbsc_entry'
 require 'row_entry'
 
@@ -32,7 +33,7 @@ class MakeGraph
   def render_template
     num_sets = 4
     opa_base = 1
-    data = 1.upto(num_sets).map do |set|
+    @data = 1.upto(num_sets).map do |set|
       { x: @entries.map(&:formatted_time),
         y: @entries.map { |e| e.reps_in_set(set) },
         hovertext: @entries.map(&:comment),
@@ -45,7 +46,7 @@ class MakeGraph
       }
     end
 
-    layout = {
+    @layout = {
       title: "FBSC",
       xaxis: {
         tickangle: -45,
@@ -54,31 +55,36 @@ class MakeGraph
       barmode: 'stack'
     }
 
+    rhtml = ERB.new(template)
+    rhtml.result(binding)
+  end
+
+  def out(message)
+    $stderr.puts "#{Time.now}: #{message}"
+  end
+
+  def template
     <<-EOHTML
 <!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Sport #{Time.now}</title>
+    <title>Sport <%= Time.now %></title>
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
     <style>
-      #fsbc {
+      .plot {
             width: 90vw;
             height: 90vh;
       }
     </style>
   </head>
   <body>
-    <div id="fsbc"></div>
+    <div id="fsbc" class="plot"></div>
     <script>
-      Plotly.newPlot(fsbc, #{data.to_json}, #{layout.to_json}, {responsive: true});
+      Plotly.newPlot(fsbc, <%= @data.to_json %>, <%= @layout.to_json %>, {responsive: true});
     </script>
   </body>
 </html>
     EOHTML
-  end
-
-  def out(message)
-    $stderr.puts "#{Time.now}: #{message}"
   end
 end
