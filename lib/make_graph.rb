@@ -31,7 +31,7 @@ class MakeGraph
 
   def build_graphs
     @entries = find_entries
-    @by_name = @entries.group_by(&:name)
+    @by_name = @entries.sort_by(&:name).group_by(&:name)
     out "found exercises: #{@by_name.keys.join(', ')}"
     opa_base = 1
     @graphs = @by_name.map do |name, entries|
