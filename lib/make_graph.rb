@@ -73,6 +73,7 @@ class MakeGraph
               x: e.formatted_time,
               y: 0,
               text: e.annotations,
+              font: { size: 23 },
             }
           end,
           xaxis: {
