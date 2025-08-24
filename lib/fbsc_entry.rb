@@ -35,6 +35,10 @@ class FBSCEntry < Entry
     reps_in_set(set) * band_factor
   end
 
+  def total_size
+    super * reps.total * band_factor
+  end
+
   def reps
     @reps ||= Repetitions.wrap(@pullup_reps)
   end

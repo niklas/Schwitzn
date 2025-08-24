@@ -17,6 +17,10 @@ class Entry < BaseEntry
     1.0
   end
 
+  def total_size
+    1.0
+  end
+
   def hover_text_of_set(_)
     ""
   end

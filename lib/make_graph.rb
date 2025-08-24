@@ -71,7 +71,7 @@ class MakeGraph
           annotations: entries.map do |e|
             {
               x: e.formatted_time,
-              y: 0,
+              y: e.total_size,
               text: e.annotations,
               font: { size: 23 },
             }

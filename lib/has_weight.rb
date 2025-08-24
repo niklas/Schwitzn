@@ -14,6 +14,10 @@ module HasWeight
     super(set) * @weight.total
   end
 
+  def total_size
+    super * @weight.total
+  end
+
   def hover_text_of_set(_)
     "#{@weight.inspect} #{super}"
   end
