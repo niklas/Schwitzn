@@ -64,6 +64,9 @@ class MakeGraph
           },
           showlegend: false,
           barmode: 'stack'
+        },
+        settings: {
+          responsive: true,
         }
       }
     end
@@ -134,7 +137,7 @@ class MakeGraph
     <% @graphs.each do |graph|  %>
       <div id="<%= graph[:id] %>" class="plot"></div>
       <script>
-        Plotly.newPlot(<%= graph[:id] %>, <%= graph[:data].to_json %>, <%= graph[:layout].to_json %>, {responsive: true});
+        Plotly.newPlot(<%= graph[:id] %>, <%= graph[:data].to_json %>, <%= graph[:layout].to_json %>, <%= graph[:settings].to_json %>);
       </script>
     <% end %>
   </body>
