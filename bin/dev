@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -eu
+
+cleanup() {
+    # kill all processes whose parent is this process
+    pkill -P $$
+    reset
+}
+trap cleanup EXIT
+
+mkdir -p tmp
+outfile="tmp/dev.html"
+touch $outfile
+
+(find ~/org/Sport.org bin lib spec | entr -c bin/run ~/org/Sport.org $outfile) &
+(sleep 5; xdg-open $outfile &)
+livereload --port 51754 $outfile
