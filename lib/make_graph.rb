@@ -6,6 +6,7 @@ class MakeGraph
 
   def run
     build_graphs
+    @title = "Sport #{Time.now}"
     @livereload = %Q[<script src="http://localhost:51754/livereload.js"></script>]
     File.open(@html, 'w') do |f|
       f.write render_template
@@ -82,7 +83,7 @@ class MakeGraph
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Sport <%= Time.now %></title>
+    <title><%= @title %></title>
     <script src="https://cdn.plot.ly/plotly-2.34.0.min.js" charset="utf-8"></script>
     <%= @livereload %>
     <style>
