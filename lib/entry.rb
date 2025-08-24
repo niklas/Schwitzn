@@ -20,4 +20,8 @@ class Entry < BaseEntry
   def hover_text_of_set(_)
     ""
   end
+
+  def annotations
+    ""
+  end
 end

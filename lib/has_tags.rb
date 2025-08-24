@@ -15,4 +15,8 @@ module HasTags
   def has_tag?(needle)
     @tags.include?(needle)
   end
+
+  def annotations
+    "#{@tags.map(&:icon).join()} #{super}"
+  end
 end

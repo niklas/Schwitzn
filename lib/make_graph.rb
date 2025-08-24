@@ -67,6 +67,13 @@ class MakeGraph
           font: {
             color: Color.text,
           },
+          annotations: entries.map do |e|
+            {
+              x: e.formatted_time,
+              y: 0,
+              text: e.annotations,
+            }
+          end,
           xaxis: {
             range: default_range,
             minallowed: full_range.first,
