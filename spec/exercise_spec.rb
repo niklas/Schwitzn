@@ -3,7 +3,6 @@ describe Exercise do
     described_class.new(
       time: '2015-07-02Z13:30',
       name: 'Eier schaukeln',
-      sets: 3,
       reps: 20,
       weight: 2,
       tags: ['lazy'],
@@ -17,7 +16,6 @@ describe Exercise do
     expect(described_class.attribute_names.sort).to eq([
                                                          :time,
                                                          :name,
-                                                         :sets,
                                                          :reps,
                                                          :weight,
                                                          :comments,
@@ -31,10 +29,6 @@ describe Exercise do
 
   it 'stores name' do
     expect(e.name).to eq('Eier schaukeln')
-  end
-
-  it 'stores sets' do
-    expect(e.sets).to eq(3)
   end
 
   it 'stores reps' do
@@ -57,7 +51,7 @@ describe Exercise do
     let(:reps) {[8,5,2]}
     it 'can be a list' do
       e = described_class.new(reps: reps, time: '2063-12-24')
-      expect(e.reps).to eq(reps)
+      expect(e.reps).to eq(15)
     end
   end
 end

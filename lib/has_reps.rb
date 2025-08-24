@@ -6,6 +6,13 @@ module HasReps
   def initialize(*_, **a)
     super
     reps = a[:reps]
-    @reps = reps && Repetitions.wrap(reps)
+    sets = a[:sets]
+    @reps = if reps
+              if sets
+                Repetitions.wrap(sets, reps)
+              else
+                Repetitions.wrap(reps)
+              end
+            end
   end
 end
