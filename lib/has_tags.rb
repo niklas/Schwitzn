@@ -19,4 +19,8 @@ module HasTags
   def annotations
     "#{@tags.map(&:icon).join()} #{super}"
   end
+
+  def hover_text_of_set(_)
+    "#{super} #{@tags.join(' ')}"
+  end
 end
