@@ -13,6 +13,8 @@ class FBSCEntry < Entry
   attribute :band_color
   attribute :pullup_reps
 
+  delegate :reps_in_set, to: :reps
+
   def initialize(**a)
     super(**a)
 
@@ -28,10 +30,6 @@ class FBSCEntry < Entry
 
   def band_support?
     @band_support
-  end
-
-  def reps_in_set(num)
-    @pullup_reps[num-1] || 0
   end
 
   def color_in_set(set, total)

@@ -34,5 +34,12 @@ describe FBSCEntry do
     it 'has reps' do
       expect(e.reps.to_a).to eq([8, 8, 8, 7])
     end
+
+    it 'has reps_in_set' do
+      expect(e.reps_in_set(1)).to eq(8)
+      expect(e.reps_in_set(2)).to eq(8)
+      expect(e.reps_in_set(3)).to eq(8)
+      expect(e.reps_in_set(4)).to eq(7)
+    end
   end
 end
