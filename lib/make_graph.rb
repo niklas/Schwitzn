@@ -33,8 +33,8 @@ class MakeGraph
     opa_base = 1
     @graphs = @by_name.map do |name, entries|
       num_sets = entries.map { |e| e.reps.to_a.length }.max
-      newest = entries.map(&:time).max || Time.now
-      oldest = entries.map(&:time).min || Time.now
+      newest = (entries.map(&:time).max || Time.now) + 1.day
+      oldest = (entries.map(&:time).min || Time.now) - 1.day
       oldest_seen = [newest - 300.days, oldest].max
       full_range = [oldest, newest].map { |t| HasTime.format(t) }
       default_range = [oldest_seen, newest].map { |t| HasTime.format(t) }
@@ -61,11 +61,14 @@ class MakeGraph
           title: name,
           paper_bgcolor: Color.transparent,
           plot_bgcolor: Color.transparent,
+          dragmode: 'pan',
           font: {
             color: Color.text,
           },
           xaxis: {
             range: default_range,
+            minallowed: full_range.first,
+            maxallowed: full_range.last,
             type: 'date',
             tickangle: -45,
             rangeslider: { range: full_range },
