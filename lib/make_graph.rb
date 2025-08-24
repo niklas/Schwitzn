@@ -33,9 +33,9 @@ class MakeGraph
     @entries = find_entries
     @by_name = @entries.group_by(&:name)
     out "found exercises: #{@by_name.keys.join(', ')}"
-    num_sets = 4
     opa_base = 1
     @graphs = @by_name.map do |name, entries|
+      num_sets = entries.map { |e| e.reps.to_a.length }.max
       data = 1.upto(num_sets).map do |set|
         { x: entries.map(&:formatted_time),
           y: entries.map { |e| e.reps_in_set(set) },
