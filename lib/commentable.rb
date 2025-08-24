@@ -11,4 +11,8 @@ module Commentable
     comments = (a[:comments].presence || []).map { |s| Comment.new(s) }
     @comments = comments + comment_tags
   end
+
+  def comment
+    comments.join(', ')
+  end
 end
