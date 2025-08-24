@@ -69,12 +69,14 @@ class MakeGraph
             color: Color.text,
           },
           annotations: entries.map do |e|
-            {
-              x: e.formatted_time,
-              y: e.total_size,
-              text: e.annotations,
-              font: { size: 23 },
-            }
+            if (ano = e.annotations).present?
+              {
+                x: e.formatted_time,
+                y: e.total_size,
+                text: ano,
+                font: { size: 23 },
+              }
+            end
           end,
           xaxis: {
             range: default_range,
