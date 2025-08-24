@@ -10,8 +10,7 @@ class MakeGraph
   end
 
   def run
-    @entries = find_entries
-
+    build_graphs
     File.open(@html, 'w') do |f|
       f.write render_template
     end
@@ -30,33 +29,43 @@ class MakeGraph
     entries
   end
 
-  def render_template
+  def build_graphs
+    @entries = find_entries
+    @by_name = @entries.group_by(&:name)
+    out "found exercises: #{@by_name.keys.join(', ')}"
     num_sets = 4
     opa_base = 1
-    @data = 1.upto(num_sets).map do |set|
-      { x: @entries.map(&:formatted_time),
-        y: @entries.map { |e| e.reps_in_set(set) },
-        hovertext: @entries.map(&:comment),
-        marker: {
-          color: @entries.map { |e| e.color_in_set(set, num_sets) },
-          opacity: (set + opa_base).to_f / (num_sets + opa_base),
-        },
-        name: "Set #{set}",
-        type: 'bar'
+    @graphs = @by_name.map do |name, entries|
+      data = 1.upto(num_sets).map do |set|
+        { x: entries.map(&:formatted_time),
+          y: entries.map { |e| e.reps_in_set(set) },
+          hovertext: entries.map(&:comment),
+          marker: {
+            color: entries.map { |e| e.color_in_set(set, num_sets) },
+            opacity: (set + opa_base).to_f / (num_sets + opa_base),
+          },
+          name: "Set #{set}",
+          type: 'bar'
+        }
+      end
+      {
+        id: name.gsub(/\W/, '_'),
+        name: name,
+        data: data,
+        layout:  {
+          title: name,
+          xaxis: {
+            tickangle: -45,
+          },
+          showlegend: false,
+          barmode: 'stack'
+        }
       }
     end
+  end
 
-    @layout = {
-      title: "FBSC",
-      xaxis: {
-        tickangle: -45,
-      },
-      showlegend: false,
-      barmode: 'stack'
-    }
-
-    rhtml = ERB.new(template)
-    rhtml.result(binding)
+  def render_template
+    ERB.new(template).result(binding)
   end
 
   def out(message)
@@ -79,10 +88,12 @@ class MakeGraph
     </style>
   </head>
   <body>
-    <div id="fsbc" class="plot"></div>
-    <script>
-      Plotly.newPlot(fsbc, <%= @data.to_json %>, <%= @layout.to_json %>, {responsive: true});
-    </script>
+    <% @graphs.each do |graph|  %>
+      <div id="<%= graph[:id] %>" class="plot"></div>
+      <script>
+        Plotly.newPlot(<%= graph[:id] %>, <%= graph[:data].to_json %>, <%= graph[:layout].to_json %>, {responsive: true});
+      </script>
+    <% end %>
   </body>
 </html>
     EOHTML
