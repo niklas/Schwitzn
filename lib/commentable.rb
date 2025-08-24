@@ -15,4 +15,8 @@ module Commentable
   def comment
     comments.join(', ')
   end
+
+  def hover_text_in_set(_)
+    "#{super} #{comment}"
+  end
 end

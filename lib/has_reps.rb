@@ -20,6 +20,10 @@ module HasReps
   end
 
   def size_of_set(set)
-    reps_in_set(set)
+    reps_in_set(set) * super
+  end
+
+  def hover_text_of_set(set)
+    "#{reps_in_set(set)}x #{super}"
   end
 end

@@ -1,8 +1,8 @@
 require 'entry'
 class Exercise < Entry
   include Commentable
-  include HasReps
   include HasWeight
+  include HasReps
   include HasTags
 
   def belongs_to(parent)
