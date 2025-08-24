@@ -15,6 +15,8 @@ class Tag < String
     badform-left
     support
     lazy
+    fail
+    ez
   ).freeze
 
   ICONS = {
@@ -33,6 +35,8 @@ class Tag < String
     'badform-left'  => '🫳',
     'support'       => '🪑',
     'lazy'          => '🛋️',
+    'ez'            => '💪️',
+    'fail'          => '🚫',
   }.freeze
 
   def initialize(name)
