@@ -1,6 +1,7 @@
 module HasReps
   def self.included(base)
     base.attribute :reps
+    delegate :reps_in_set, to: :reps
   end
 
   def initialize(*_, **a)

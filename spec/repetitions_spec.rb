@@ -4,6 +4,9 @@ describe Repetitions do
     it 'totals to 42' do
       expect(r.total).to eq(42)
     end
+    it 'gives list' do
+      expect(r.to_a).to eq([42])
+    end
     it 'looks good' do
       expect(r.inspect).to eq('42')
     end
@@ -14,6 +17,9 @@ describe Repetitions do
     it 'totals to 60' do
       expect(r.total).to eq(60)
     end
+    it 'gives list' do
+      expect(r.to_a).to eq([12,12,12,12,12])
+    end
     it 'looks good' do
       expect(r.inspect).to eq('5x12')
     end
@@ -23,6 +29,9 @@ describe Repetitions do
     let(:r) { described_class.wrap([8,6,3]) }
     it 'totals to 17' do
       expect(r.total).to eq(17)
+    end
+    it 'gives list' do
+      expect(r.to_a).to eq([8,6,3])
     end
     it 'looks good' do
       expect(r.inspect).to eq('8-6-3')

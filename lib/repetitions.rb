@@ -25,6 +25,10 @@ class Repetitions
     to_i == other.to_i
   end
 
+  def reps_in_set(i)
+    to_a[i-1] || 0
+  end
+
   class Times < Repetitions
     def initialize(sets, n)
       @sets = Repetitions.parse_num(sets)
@@ -32,6 +36,7 @@ class Repetitions
     end
 
     def total = @sets * @n
+    def to_a = [@n] * @sets
     def inspect = "#{@sets}x#{@n}"
   end
 
@@ -41,6 +46,7 @@ class Repetitions
     end
 
     def total = @n
+    def to_a = Array(@n)
     def inspect = @n.to_s
   end
 
@@ -50,6 +56,7 @@ class Repetitions
     end
 
     def total = @seq.sum
+    def to_a = @seq
     def inspect = @seq.join('-')
   end
 
