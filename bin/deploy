@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -eu
+
+outfile=$(mktemp --suffix=.html)
+
+bin/run ~/org/Sport.org $outfile
+chmod a+r $outfile
+scp -Bp $outfile lanpartei.de:public_html/Sport.html
