@@ -61,6 +61,7 @@ class MakeGraph
             tickangle: -45,
           },
           yaxis: {
+            fixedrange: true,
             gridcolor: Color.grid,
           },
           showlegend: false,
