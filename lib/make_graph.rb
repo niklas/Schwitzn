@@ -10,10 +10,11 @@ class MakeGraph
     @livereload = if @html =~ /dev.html/
                     %Q[<script src="http://localhost:51754/livereload.js"></script>]
                   end
+    out = render_template
     File.open(@html, 'w') do |f|
-      f.write render_template
+      f.write out
     end
-    out "Generated #{@html}"
+    out "Generated #{@html}, size: #{out.length / 1024}kiB"
   end
 
   def find_entries
