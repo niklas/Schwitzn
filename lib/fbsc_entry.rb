@@ -38,8 +38,10 @@ class FBSCEntry < Entry
                  'rgba(10,10,200,1)'
                when 'black'
                  'rgba(10,10,10,1)'
+               when nil # no band
+                 'rgba(186,165,121, 0.3)' # skin color
                else
-                 raise "cannot find color_in_set for #{band_color}"
+                 raise "cannot find color_in_set for #{band_color}\n#{inspect}"
                end
   end
 
