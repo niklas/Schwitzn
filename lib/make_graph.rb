@@ -32,15 +32,15 @@ class MakeGraph
   def render_template
     num_sets = 4
     opa_base = 1
-    data = 1.upto(num_sets).map do |i|
+    data = 1.upto(num_sets).map do |set|
       { x: @entries.map(&:formatted_time),
-        y: @entries.map { |e| e.reps_in_set(i) },
+        y: @entries.map { |e| e.reps_in_set(set) },
         hovertext: @entries.map(&:comment),
         marker: {
-          color: @entries.map { |e| e.color_in_set(i, num_sets) },
-          opacity: (i + opa_base).to_f / (num_sets + opa_base),
+          color: @entries.map { |e| e.color_in_set(set, num_sets) },
+          opacity: (set + opa_base).to_f / (num_sets + opa_base),
         },
-        name: "Set #{i}",
+        name: "Set #{set}",
         type: 'bar'
       }
     end
