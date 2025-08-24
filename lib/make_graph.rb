@@ -48,6 +48,7 @@ class MakeGraph
             opacity: (set + opa_base).to_f / (num_sets + opa_base),
           },
           name: "Set #{set}",
+          width: 2.days.in_seconds * 1000,
           type: 'bar',
         }
       end
