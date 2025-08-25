@@ -19,6 +19,7 @@ class Tag < String
     ez
     standing
     hothead
+    groggy
   ).freeze
 
   ICONS = {
@@ -41,6 +42,7 @@ class Tag < String
     'fail'          => '🚫',
     'standing'      => '🧍',
     'hothead'       => '💫',
+    'groggy'        => '💫',
   }.freeze
 
   def initialize(name)
