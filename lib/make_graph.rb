@@ -61,7 +61,7 @@ class MakeGraph
         name: name,
         data: data,
         layout:  {
-          title: "#{name} (Volume)",
+          title: "#{name} (Volume) - #{entries.size} Einträge",
           paper_bgcolor: Color.transparent,
           plot_bgcolor: Color.transparent,
           dragmode: 'pan',
