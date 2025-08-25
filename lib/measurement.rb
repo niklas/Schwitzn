@@ -42,5 +42,13 @@ class Measurement < ValueWrapper
     count * mult
   end
 
+  def total_factor
+    if (t = total) > 0
+      t
+    else
+      1
+    end
+  end
+
   def self.default_unit = 'units'
 end

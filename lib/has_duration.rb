@@ -12,11 +12,11 @@ module HasDuration
   end
 
   def size_of_set(set)
-    super(set) * @duration.total
+    super(set) * @duration.total_factor
   end
 
   def total_size
-    super * @weight.total
+    super * @duration.total_factor
   end
 
   def hover_text_of_set(_)

@@ -11,11 +11,11 @@ module HasWeight
   end
 
   def size_of_set(set)
-    super(set) * @weight.total
+    super(set) * @weight.total_factor
   end
 
   def total_size
-    super * @weight.total
+    super * @weight.total_factor
   end
 
   def hover_text_of_set(_)

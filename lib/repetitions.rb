@@ -24,6 +24,10 @@ class Repetitions
     One.new(0)
   end
 
+  def self.one
+    One.new(1)
+  end
+
   def to_i = total
   def ==(other)
     to_i == other.to_i

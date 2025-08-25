@@ -15,7 +15,7 @@ module HasReps
                 Repetitions.wrap(reps)
               end
             else
-              Repetitions.none
+              Repetitions.one
             end
   end
 
@@ -28,6 +28,11 @@ module HasReps
   end
 
   def hover_text_of_set(set)
-    "#{reps_in_set(set)}x #{super}"
+    n = reps_in_set(set)
+    if n == 1
+      super
+    else
+      "#{reps_in_set(set)}x #{super}"
+    end
   end
 end
