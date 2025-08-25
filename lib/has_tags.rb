@@ -21,6 +21,10 @@ module HasTags
   end
 
   def hover_text_of_set(_)
-    "#{super} #{@tags.join(' ')}"
+    "#{super} #{hash_tags.join(' ')}"
+  end
+
+  def hash_tags
+    @tags.map { |t| "##{t}" }
   end
 end
