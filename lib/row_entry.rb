@@ -11,4 +11,8 @@ class RowEntry < Entry
     @duration = duration
     @level = level
   end
+
+  def name
+    'Rowing machine'
+  end
 end
