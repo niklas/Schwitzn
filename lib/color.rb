@@ -32,6 +32,10 @@ class Color
       '#333333'
     end
 
+    def bar_line
+      '#555555'
+    end
+
     def links
       '#ddffdd'
     end

@@ -47,6 +47,10 @@ class MakeGraph
           y: entries.map { |e| e.size_of_set(set) },
           hovertext: entries.map { |e| e.hover_text_of_set(set) },
           marker: {
+            line: {
+              color: Color.bar_line,
+              width: 1
+            },
             color: entries.map { |e| e.color_in_set(set, num_sets) },
             opacity: (set + opa_base).to_f / (num_sets + opa_base),
           },
