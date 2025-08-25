@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+cd $(dirname $(dirname $0))
+
+echo ~/org/Sport.org  | entr bin/deploy
