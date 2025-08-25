@@ -20,6 +20,10 @@ module HasDuration
   end
 
   def hover_text_of_set(_)
-    "#{@duration.inspect} #{super}"
+    if @duration.zero?
+      super
+    else
+      "#{@duration.inspect} #{super}"
+    end
   end
 end

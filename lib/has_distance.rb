@@ -20,6 +20,10 @@ module HasDistance
   end
 
   def hover_text_of_set(_)
-    "#{@distance.inspect} #{super}"
+    if @distance.zero?
+      super
+    else
+      "#{@distance.inspect} #{super}"
+    end
   end
 end

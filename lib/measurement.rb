@@ -39,15 +39,19 @@ class Measurement < ValueWrapper
   end
 
   def total
-    count * mult
+    @total ||= count * mult
   end
 
   def total_factor
-    if (t = total) > 0
-      t
-    else
+    if zero?
       1
+    else
+      total
     end
+  end
+
+  def zero?
+    total.zero?
   end
 
   def self.default_unit = 'units'
