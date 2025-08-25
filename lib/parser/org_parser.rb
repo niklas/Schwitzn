@@ -57,7 +57,7 @@ class Parser::OrgParser < Parslet::Parser
   rule(:optional_notes_in_parens) do
     (space >> lparen >> notes >> rparen ).maybe
   end
-  rule(:notes)      { (note >> (comma >> space?).maybe).repeat }
+  rule(:notes)      { (note >> (comma.maybe >> space?).maybe).repeat }
   rule(:note)       { pause | tag_name.as(:tag) | distance.as(:distance) | free_comment.as(:comment) }
   rule(:tags)       { (tag >> (comma >> space?).maybe).repeat }
   rule(:tag)        { tag_name.as(:tag) | distance.as(:distance) }
