@@ -189,7 +189,7 @@ class MakeGraph
       aside#navigation a {
         display: block;
       }
-      body:has(.plot:hover) aside#navigation {
+      body:has(.plot:hover, .dragcover) aside#navigation {
         display: none;
       }
     </style>
