@@ -2,6 +2,8 @@
 
 set -eu
 
+cd $(dirname $(dirname $0))
+
 outfile=$(mktemp --suffix=.html)
 
 bin/run ~/org/Sport.org $outfile
