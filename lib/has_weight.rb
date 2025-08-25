@@ -19,6 +19,10 @@ module HasWeight
   end
 
   def hover_text_of_set(_)
-    "#{@weight.inspect} #{super}"
+    if @weight.zero?
+      super
+    else
+      "#{@weight.inspect} #{super}"
+    end
   end
 end
