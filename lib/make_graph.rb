@@ -170,19 +170,20 @@ class MakeGraph
       .plot {
             width: 95vw;
             height: 90vh;
+            margin-left: 5vw;
       }
       aside#navigation {
         position: fixed;
         font-size: 120%;
-        right: 0;
+        left: 0;
         top: 0;
         background-color: #000000DD;
         padding: 1rem 2rem;
         z-index: 1;
         border-bottom-color: white;
-        border-left-color: white;
-        border-width: 0 0 1px 1px;
-        border-bottom-left-radius: 0.5em;
+        border-right-color: white;
+        border-width: 0 1px 1px 0;
+        border-bottom-right-radius: 0.5em;
         border-style: solid;
       }
       aside#navigation a {
