@@ -25,6 +25,7 @@ class MakeGraph
                 .grep_v(SkipEntry)
                 .grep_v(AltEntry)
                 .grep_v(NamedWorkout)
+                .grep_v(Remark)
     out "considering #{entries.size} entries"
     entries
   end

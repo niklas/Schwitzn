@@ -78,6 +78,7 @@ class Parser::OrgParser < Parslet::Parser
       fbsc_workout |
       detailed_workout |
       named_workout |
+      remark |
       no_workout
   end
 
@@ -112,6 +113,9 @@ class Parser::OrgParser < Parslet::Parser
     reps_count.as(:reps) >> space >>
       (str('straight Ferengi') | str('straight run Ferengi')) >>
       optional_notes_in_parens.as(:notes)
+  end
+  rule(:remark) do
+    str('REM:') >> space >> rest_of_line.as(:remark)
   end
   rule(:no_workout) do
     (str('SKIP') | str('ALT')).as(:workout_name) >>

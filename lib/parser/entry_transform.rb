@@ -17,6 +17,12 @@ class Parser::EntryTransform < Parslet::Transform
     Pause.new(min:, sec:)
   end
   rule(
+    remark: simple(:remark),
+    time: simple(:time)
+  ) do
+    Remark.new(time: time, comment: remark)
+  end
+  rule(
     time: simple(:time),
     workout_name: 'FBSC1',
     pullup_reps: sequence(:pullup_reps),

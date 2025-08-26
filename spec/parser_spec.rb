@@ -71,6 +71,7 @@ EOORG
   norwegian squats 3x12 @5kg
   Negatives Bankdrücken 10-9-9 @18kg
 - <2025-01-05 Sun 19:30> FRS1
+- <2025-03-30 Sun 00:00> REM: Happy Whatever
 - <2025-06-29 So 12:30> MAB 20s
 - <2025-07-07 Mo 19:40> HB2
   Rows 12@5kg
@@ -125,6 +126,7 @@ Meet only Milfs, ignore please
         Exercise.new(time: '2024-11-12Z20:21', name: 'norwegian squats', sets: 3, reps: 12, weight: 5),
         Exercise.new(time: '2024-11-12Z20:21', name: 'Negatives Bankdrücken', reps: [10,9,9], weight: 18),
         NamedWorkout.new(time: '2025-01-05Z19:30', name: 'FRS1'),
+        Remark.new(time: '2025-03-30Z00:00', text: 'Happy Whatever'),
         NamedWorkout.new(time: '2025-06-29Z12:30', name: 'MAB', duration: Duration.new(20, 's')),
         Exercise.new(time: '2025-07-07Z19:40', name: 'Rows', reps: 12, weight: 5),
         Exercise.new(time: '2025-07-07Z19:40', name: 'Negatives Bankdrücken', reps: 12, weight: 5),
