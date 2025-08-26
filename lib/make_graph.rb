@@ -6,7 +6,8 @@ class MakeGraph
 
   def run
     build_graphs
-    @title = "Sport #{Time.now}"
+    @now = Time.now
+    @title = "Sport #{@now}"
     @livereload = if @html =~ /dev.html/
                     %Q[<script src="http://localhost:51754/livereload.js"></script>]
                   end
@@ -193,6 +194,16 @@ class MakeGraph
       body:has(.plot:hover, .dragcover) aside#navigation {
         display: none;
       }
+      footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+        color: <%= Color.grid %>;
+        a {
+          color: <%= Color.grid %>;
+        }
+      }
     </style>
   </head>
   <body>
@@ -207,6 +218,11 @@ class MakeGraph
         Plotly.newPlot(<%= graph[:id] %>, <%= graph[:data].to_json %>, <%= graph[:layout].to_json %>, <%= graph[:settings].to_json %>);
       </script>
     <% end %>
+    <footer>
+      <span>Generated at <%= @now %></span>
+      <a href="https://github.com/niklas/Schwitzn">source</a>
+      <span>by Niklas</span>
+    </footer>
   </body>
 </html>
     EOHTML
